@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gina's Travel Agency | Flights, Tours, Hotels & Visa Assistance in London</title>
+<meta name="description" content="Gina's Travel Agency is an independent travel agency in London offering flight booking, tour packages, hotel reservations and visa assistance. Call or WhatsApp +44 7432 112769.">
+<meta name="theme-color" content="#1E2C96">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gina's Travel Agency | London">
+<meta property="og:description" content="Flights, tour packages, hotel reservations and visa assistance, handled by a real travel consultant in London.">
+<meta property="og:image" content="assets/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E2C96'/%3E%3Cpath fill='%23F58A2A' transform='translate(12 12) scale(1.7)' d='M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TravelAgency","name":"Gina's Travel Agency","telephone":"+447432112769","address":{"@type":"PostalAddress","addressLocality":"London","addressCountry":"GB"},"sameAs":["https://www.instagram.com/ginatravelagency.uk"],"openingHours":"Mo-Sa 09:00-19:00"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap">
+<style>
+/* Layout: full-bleed brand sections, single light theme taken from the flier (royal blue + orange on warm white). */
+:root{
+  --blue:#1E2C96; --blue-deep:#141F6E; --blue-ink:#0F1650;
+  --orange:#F58A2A; --orange-deep:#E0731A; --orange-soft:#FFF1E4;
+  --paper:#FBF9F5; --paper-2:#F3F0E9; --white:#FFFFFF;
+  --ink:#141A3F; --ink-2:#4A5070; --line:#E4E1D8;
+  --display:'Poppins',ui-sans-serif,system-ui,sans-serif;
+  --body:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+  --r:20px; --shadow:0 20px 50px -20px rgba(20,31,110,.28);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance;color:var(--ink)}
+p{margin:0}
+a{color:inherit}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.wrap{width:min(1180px,100%);margin-inline:auto;padding-inline:clamp(18px,4vw,40px)}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-deep);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--orange)}
+.h2{font-size:clamp(30px,4.2vw,50px);font-weight:700;letter-spacing:-.02em;margin-top:14px}
+.h2 em{font-style:normal;color:var(--orange)}
+.lead{color:var(--ink-2);font-size:clamp(16px,1.3vw,18px);max-width:58ch;margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;font-family:var(--display);font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--orange);color:var(--white);box-shadow:0 12px 30px -10px rgba(245,138,42,.7)}
+.btn-primary:hover{background:var(--orange-deep)}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.5)}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn-blue{background:var(--blue);color:var(--white)}
+.btn-blue:hover{background:var(--blue-deep)}
+.btn svg{width:18px;height:18px}
+
+/* progress bar */
+#progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:0;background:linear-gradient(90deg,var(--orange),#FFB369);z-index:60}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s,box-shadow .4s,backdrop-filter .4s}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
+.nav.solid{background:rgba(251,249,245,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.logo{display:flex;align-items:baseline;gap:2px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--white);transition:color .4s}
+.logo .g{display:inline-grid;place-items:center;width:30px;height:30px;color:var(--orange)}
+.logo small{font-weight:500;font-size:11px;letter-spacing:.02em;margin-left:4px;opacity:.85}
+.nav.solid .logo{color:var(--blue)}
+.navlinks{display:flex;gap:30px;list-style:none;margin:0;padding:0}
+.navlinks a{text-decoration:none;font-family:var(--display);font-weight:500;font-size:14px;color:rgba(255,255,255,.88);position:relative;padding:6px 0;transition:color .4s}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--orange);transition:width .3s}
+.navlinks a:hover::after{width:100%}
+.nav.solid .navlinks a{color:var(--ink)}
+.nav .btn{padding:11px 20px;font-size:14px}
+.burger{display:none;width:44px;height:44px;border:0;background:transparent;cursor:pointer;color:var(--white)}
+.nav.solid .burger{color:var(--blue)}
+.burger span{display:block;width:22px;height:2px;background:currentColor;margin:5px auto;transition:.3s}
+@media(max-width:900px){
+  .navlinks,.nav .btn{display:none}
+  .burger{display:block}
+  .nav.open .navlinks{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);box-shadow:0 20px 40px -20px rgba(0,0,0,.3)}
+  .nav.open .navlinks a{display:block;padding:16px clamp(18px,4vw,40px);color:var(--ink);border-top:1px solid var(--line)}
+  .nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav.open .burger span:nth-child(2){opacity:0}
+  .nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
+
+/* hero */
+.hero{position:relative;min-height:min(92svh,860px);display:grid;align-items:end;background:var(--blue-deep);color:var(--white);overflow:hidden;isolation:isolate}
+.hero-media{position:absolute;inset:0;z-index:-2}
+.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(15,22,80,.55) 0%,rgba(15,22,80,.2) 40%,rgba(15,22,80,.85) 100%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.7}
+.hero .wrap{position:relative;padding-block:150px 80px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end}
+.hero h1{font-size:clamp(42px,7vw,88px);font-weight:800;letter-spacing:-.035em;color:var(--white);line-height:.98}
+.hero h1 .o{color:var(--orange)}
+.hero h1 .word{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .word span{display:inline-block;transform:translateY(110%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+.hero .lead{color:rgba(255,255,255,.85);max-width:50ch;animation:fade 1s .6s both}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;animation:fade 1s .8s both}
+.hero-side{display:grid;gap:14px;animation:fade 1s 1s both}
+.ticket{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;font-size:14px;transform:translateY(0);transition:transform .4s}
+.ticket:hover{transform:translateY(-4px)}
+.ticket b{font-family:var(--display);font-weight:600;display:block;font-size:15px}
+.ticket .code{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.04em}
+.ticket .arrow{display:flex;align-items:center;gap:8px;color:var(--orange)}
+.ticket .arrow i{display:block;width:40px;height:1px;background:repeating-linear-gradient(90deg,var(--orange) 0 4px,transparent 4px 8px)}
+.ticket .tag{background:var(--orange);color:#fff;font-family:var(--display);font-weight:600;font-size:11px;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+.scroll-cue i{width:1px;height:38px;background:linear-gradient(var(--white),transparent);animation:cue 1.6s infinite}
+@keyframes rise{to{transform:translateY(0)}}
+@keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-top:130px}.hero-side{grid-template-columns:1fr}.scroll-cue{display:none}}
+
+/* trust strip */
+.strip{background:var(--blue);color:var(--white);padding-block:18px;overflow:hidden;position:relative}
+.strip .track{display:flex;gap:56px;width:max-content;animation:marquee 38s linear infinite}
+.strip span{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:56px;white-space:nowrap}
+.strip span::after{content:"✦";color:var(--orange);font-size:12px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding-block:clamp(70px,9vw,120px)}
+.section-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px}
+@media(max-width:800px){.section-head{grid-template-columns:1fr}}
+
+/* services */
+.services{background:var(--paper)}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+@media(max-width:1000px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.svc-grid{grid-template-columns:1fr}}
+.svc{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:30px 26px 28px;min-height:320px;display:flex;flex-direction:column;gap:14px;transform-style:preserve-3d;transition:box-shadow .35s,border-color .35s;overflow:hidden}
+.svc::after{content:"";position:absolute;inset:auto -40px -40px auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,var(--orange-soft),transparent 70%);opacity:0;transition:opacity .4s}
+.svc:hover{box-shadow:var(--shadow);border-color:transparent}
+.svc:hover::after{opacity:1}
+.svc .ico{width:56px;height:56px;border-radius:16px;background:var(--blue);display:grid;place-items:center;color:var(--white);transition:background .3s,transform .3s}
+.svc:hover .ico{background:var(--orange);transform:rotate(-6deg) scale(1.05)}
+.svc .ico svg{width:26px;height:26px}
+.svc h3{font-size:21px;font-weight:600}
+.svc p{color:var(--ink-2);font-size:15px}
+.svc .more{margin-top:auto;font-family:var(--display);font-weight:600;font-size:14px;color:var(--blue);display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.svc .more svg{width:16px;height:16px;transition:transform .3s}
+.svc:hover .more svg{transform:translateX(4px)}
+.svc .num{position:absolute;top:22px;right:24px;font-family:var(--display);font-weight:700;font-size:13px;color:var(--line)}
+
+/* about / split */
+.about{background:var(--white)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px);align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.photo-stack{position:relative;aspect-ratio:4/4.4;max-width:100%}
+.photo-stack .p1,.photo-stack .p2{position:absolute;border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+.photo-stack .p1{inset:0 12% 14% 0}
+.photo-stack .p2{width:52%;aspect-ratio:4/3;right:0;bottom:0;border:6px solid var(--white)}
+.photo-stack img{width:100%;height:100%;object-fit:cover}
+.photo-stack .badge{position:absolute;left:-14px;bottom:28%;background:var(--orange);color:#fff;border-radius:18px;padding:16px 20px;font-family:var(--display);box-shadow:0 20px 40px -16px rgba(245,138,42,.8);animation:float 5s ease-in-out infinite}
+.photo-stack .badge b{display:block;font-size:30px;font-weight:800;line-height:1}
+.photo-stack .badge span{font-size:12px;font-weight:500;opacity:.95}
+@keyframes float{50%{transform:translateY(-10px)}}
+.checks{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:14px}
+.checks li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;color:var(--ink-2)}
+.checks li b{color:var(--ink);font-family:var(--display);font-weight:600;display:block;font-size:16px}
+.checks .tick{flex:none;width:26px;height:26px;border-radius:50%;background:var(--orange-soft);color:var(--orange-deep);display:grid;place-items:center;margin-top:2px}
+.checks .tick svg{width:14px;height:14px}
+
+/* destinations */
+.dest{background:var(--blue-ink);color:var(--white);overflow:hidden}
+.dest .eyebrow{color:#FFB369}
+.dest .h2,.dest h3{color:var(--white)}
+.dest .lead{color:rgba(255,255,255,.72)}
+.rail-wrap{position:relative;margin-top:44px}
+.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px clamp(18px,4vw,40px) 30px;margin-inline:calc(clamp(18px,4vw,40px) * -1);scrollbar-width:none;cursor:grab}
+.rail::-webkit-scrollbar{display:none}
+.rail.dragging{cursor:grabbing;scroll-snap-type:none}
+.card{flex:0 0 min(300px,78vw);aspect-ratio:3/4;border-radius:22px;overflow:hidden;position:relative;scroll-snap-align:start;background:var(--blue-deep);transform:translateZ(0)}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.card:hover img{transform:scale(1.08)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(15,22,80,.9))}
+.card .meta{position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:1;display:grid;gap:4px}
+.card .meta small{font-family:var(--display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#FFB369}
+.card .meta h3{font-size:24px;font-weight:600}
+.card .meta p{font-size:13px;color:rgba(255,255,255,.75)}
+.card .pin{position:absolute;top:16px;left:16px;z-index:1;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;font-family:var(--display);font-size:12px;font-weight:600}
+.rail-nav{display:flex;gap:10px}
+.rail-nav button{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center;transition:.3s}
+.rail-nav button:hover{background:var(--orange);border-color:var(--orange)}
+.rail-nav svg{width:20px;height:20px}
+
+/* stats */
+.stats{background:var(--orange);color:#fff;padding-block:60px}
+.stats .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+@media(max-width:800px){.stats .grid{grid-template-columns:repeat(2,1fr)}}
+.stat b{display:block;font-family:var(--display);font-size:clamp(38px,5vw,60px);font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.stat span{font-size:14px;font-weight:500;opacity:.92;display:block;margin-top:8px}
+
+/* process */
+.process{background:var(--paper)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;position:relative}
+@media(max-width:900px){.steps{grid-template-columns:1fr}}
+.step{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:34px 28px;position:relative}
+.step .n{width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--display);font-weight:700;display:grid;place-items:center;margin-bottom:22px;box-shadow:0 0 0 8px var(--paper-2)}
+.step h3{font-size:20px;font-weight:600;margin-bottom:10px}
+.step p{color:var(--ink-2);font-size:15px}
+.steps::before{content:"";position:absolute;top:57px;left:12%;right:12%;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 16px);z-index:0}
+@media(max-width:900px){.steps::before{display:none}}
+.step{z-index:1}
+
+/* testimonials */
+.testi{background:var(--white)}
+.quote-wrap{margin-top:40px;background:var(--blue);color:#fff;border-radius:28px;padding:clamp(30px,5vw,64px);position:relative;overflow:hidden;min-height:320px}
+.quote-wrap::before{content:"“";position:absolute;top:-30px;right:30px;font-family:var(--display);font-size:280px;font-weight:800;color:rgba(255,255,255,.06);line-height:1}
+.quote{position:absolute;inset:clamp(30px,5vw,64px);opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.quote.active{opacity:1;transform:none;pointer-events:auto;position:relative;inset:auto}
+.quote p{font-family:var(--display);font-weight:500;font-size:clamp(19px,2.2vw,27px);line-height:1.4;max-width:30ch;text-wrap:pretty}
+.quote .who{display:flex;align-items:center;gap:14px}
+.quote .av{width:48px;height:48px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-family:var(--display);font-weight:700}
+.quote .who b{display:block;font-family:var(--display);font-weight:600}
+.quote .who span{font-size:13px;opacity:.75}
+.stars{color:#FFB369;letter-spacing:2px;font-size:14px}
+.dots{display:flex;gap:8px;margin-top:22px}
+.dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:.3s}
+.dots button.on{width:30px;border-radius:999px;background:var(--orange)}
+
+/* faq */
+.faq{background:var(--paper)}
+.faq-list{margin-top:40px;display:grid;gap:12px;max-width:820px}
+details{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:0 24px;transition:box-shadow .3s}
+details[open]{box-shadow:var(--shadow)}
+summary{list-style:none;cursor:pointer;padding:20px 0;font-family:var(--display);font-weight:600;font-size:17px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary .plus{flex:none;width:30px;height:30px;border-radius:50%;background:var(--orange-soft);color:var(--orange-deep);display:grid;place-items:center;transition:transform .3s,background .3s}
+details[open] summary .plus{transform:rotate(45deg);background:var(--orange);color:#fff}
+details .body{padding:0 0 22px;color:var(--ink-2);font-size:15.5px;max-width:65ch}
+
+/* contact */
+.contact{background:var(--white)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,6vw,70px);align-items:start}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.contact-info{display:grid;gap:18px;margin-top:30px}
+.ci{display:flex;gap:16px;align-items:flex-start}
+.ci .ico{flex:none;width:46px;height:46px;border-radius:14px;background:var(--orange-soft);color:var(--orange-deep);display:grid;place-items:center}
+.ci .ico svg{width:22px;height:22px}
+.ci b{display:block;font-family:var(--display);font-weight:600}
+.ci span{color:var(--ink-2);font-size:15px}
+.ci a{text-decoration:none;color:var(--blue);font-weight:500}
+.form{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:clamp(24px,3.5vw,40px);display:grid;gap:16px}
+.form h3{font-size:22px;font-weight:600}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.field{display:grid;gap:6px}
+.field label{font-family:var(--display);font-weight:500;font-size:13px;color:var(--ink)}
+.field input,.field select,.field textarea{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);background:var(--white);font:inherit;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(30,44,150,.12)}
+.field textarea{min-height:110px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:8px 14px;font-family:var(--display);font-size:13px;font-weight:500;cursor:pointer;transition:.2s}
+.chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.form .note{font-size:12.5px;color:var(--ink-2)}
+.success{display:grid;place-items:center;text-align:center;gap:12px;padding:30px 0}
+.success .ok{width:70px;height:70px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;animation:pop .5s cubic-bezier(.2,.8,.2,1)}
+.success .ok svg{width:34px;height:34px}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+
+/* cta band */
+.band{background:linear-gradient(120deg,var(--blue-deep),var(--blue) 60%,#2A3CB8);color:#fff;position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(245,138,42,.45),transparent 65%);right:-120px;top:-160px}
+.band .wrap{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;position:relative}
+@media(max-width:800px){.band .wrap{grid-template-columns:1fr}}
+.band h2{color:#fff;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.02em}
+.band p{color:rgba(255,255,255,.78);margin-top:10px;max-width:50ch}
+
+/* footer */
+footer{background:var(--blue-ink);color:rgba(255,255,255,.75);padding-block:60px 30px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.fgrid{grid-template-columns:1fr}}
+footer .logo{color:#fff;font-size:24px}
+footer h4{color:#fff;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+footer a{text-decoration:none;color:rgba(255,255,255,.75);transition:color .2s}
+footer a:hover{color:var(--orange)}
+.fbottom{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px}
+
+/* reveal system */
+.rv{transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .rv{opacity:0;transform:translateY(34px)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv-l{transform:translateX(-40px)}
+.js .rv-r{transform:translateX(40px)}
+.js .rv-scale{transform:scale(.92)}
+.js .rv.in{transform:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none}
+}
+/* floating whatsapp */
+.wa{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(37,211,102,.8);text-decoration:none;transition:transform .3s}
+.wa:hover{transform:scale(1.08)}
+.wa svg{width:28px;height:28px}
+.wa::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #25D366;opacity:0;animation:ring 2.4s infinite}
+@keyframes ring{0%{transform:scale(.8);opacity:.8}100%{transform:scale(1.4);opacity:0}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Gina's Travel Agency home">
+      <span class="g"><svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span>ina’s<small>Travel Agency</small>
+    </a>
+    <ul class="navlinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#process">How it works</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#contact">Plan my trip</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero">
+  <div class="hero-media"><img id="heroImg" src="assets/hero.jpg" alt="Sunrise over clouds seen from an aircraft window"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" style="color:#FFB369">London · United Kingdom</span>
+      <h1 style="margin-top:18px">
+        <span class="word"><span style="animation-delay:.05s">Book</span></span>
+        <span class="word"><span style="animation-delay:.12s">your</span></span><br>
+        <span class="word"><span class="o" style="animation-delay:.2s">Flight</span></span>
+        <span class="word"><span style="animation-delay:.28s">with</span></span>
+        <span class="word"><span style="animation-delay:.36s">ease.</span></span>
+      </h1>
+      <p class="lead" style="margin-top:22px">Flights, tour packages, hotel reservations and visa assistance, handled by a real travel consultant in London. Tell us where you want to go and we take care of the rest.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#contact">Get a free quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#services">See our services</a>
+      </div>
+    </div>
+    <div class="hero-side" aria-label="Example routes we arrange">
+      <div class="ticket"><div><span class="code">LHR</span><b>London</b></div><div class="arrow"><i></i><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg><i></i></div><div><span class="code">LOS</span><b>Lagos</b></div></div>
+      <div class="ticket"><div><span class="code">LGW</span><b>London</b></div><div class="arrow"><i></i><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg><i></i></div><div><span class="code">DXB</span><b>Dubai</b></div></div>
+      <div class="ticket"><div><span class="code">MAN</span><b>Manchester</b></div><div class="arrow"><i></i><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg><i></i></div><div><span class="code">JFK</span><b>New York</b></div><span class="tag">Family fare</span></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><i></i></div>
+</section>
+
+<div class="strip" aria-hidden="true"><div class="track">
+  <span>Flight booking</span><span>Tour packages</span><span>Hotel reservations</span><span>Visa assistance</span><span>Group trips</span><span>Family holidays</span><span>Solo travellers</span><span>Honeymoons</span>
+  <span>Flight booking</span><span>Tour packages</span><span>Hotel reservations</span><span>Visa assistance</span><span>Group trips</span><span>Family holidays</span><span>Solo travellers</span><span>Honeymoons</span>
+</div></div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div>
+        <span class="eyebrow">What we do</span>
+        <h2 class="h2">Everything for the trip, <em>one person to call.</em></h2>
+      </div>
+      <p class="lead" style="margin-top:0">We don’t sell tickets through a website. We plan the whole journey with you, then book it on your behalf.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc rv" style="transition-delay:.05s">
+        <span class="num">01</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+        <h3>Flight booking</h3>
+        <p>Economy to first class, one-way, return or multi-city. We compare fares across airlines and find routes the comparison sites miss, including flexible tickets and group fares.</p>
+        <a class="more" href="#contact">Request a fare <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc rv" style="transition-delay:.12s">
+        <span class="num">02</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h3>Tour packages</h3>
+        <p>Curated holidays with flights, hotel and experiences bundled together. Beach escapes, city breaks, safaris, pilgrimages and once-in-a-lifetime trips, tailored to your budget.</p>
+        <a class="more" href="#contact">Browse ideas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc rv" style="transition-delay:.19s">
+        <span class="num">03</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></div>
+        <h3>Hotel reservations</h3>
+        <p>From boutique stays to five-star resorts and serviced apartments. We reserve rooms at negotiated rates and make sure the location fits the rest of your plans.</p>
+        <a class="more" href="#contact">Find a stay <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="svc rv" style="transition-delay:.26s">
+        <span class="num">04</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 18c1.5-2 3-3 5-3s3.5 1 5 3"/></svg></div>
+        <h3>Visa assistance</h3>
+        <p>Guidance on visa requirements, document checklists, appointment booking and application review for UK, Schengen, USA, Canada, UAE and more. Fewer mistakes, fewer delays.</p>
+        <a class="more" href="#contact">Check requirements <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap split">
+    <div class="photo-stack rv rv-l">
+      <div class="p1"><img src="assets/consultant.jpg" alt="Travel consultant reviewing an itinerary with a client"></div>
+      <div class="p2"><img src="assets/passport.jpg" alt="Passport with boarding passes"></div>
+      <div class="badge"><b>10+</b><span>years helping travellers</span></div>
+    </div>
+    <div class="rv rv-r">
+      <span class="eyebrow">About Gina’s</span>
+      <h2 class="h2">A London travel agency that <em>answers the phone.</em></h2>
+      <p class="lead">Gina’s Travel Agency is an independent agency based in London. We work with families, solo travellers, couples and groups across the UK, and we’re particularly known for routes to West Africa, the Middle East and North America.</p>
+      <ul class="checks">
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><div><b>Personal, not automated</b>Every enquiry is handled by a consultant who knows your trip, start to finish.</div></li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><div><b>Protected bookings</b>Flights and packages booked through accredited partners, with your money protected.</div></li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><div><b>Support while you travel</b>Missed connection, schedule change, lost bag: message us and we sort it.</div></li>
+      </ul>
+      <div style="margin-top:30px"><a class="btn btn-blue" href="#contact">Talk to a consultant</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="dest" id="destinations">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div>
+        <span class="eyebrow">Popular right now</span>
+        <h2 class="h2">Where our clients are <em>flying this season.</em></h2>
+      </div>
+      <div class="rail-nav"><button id="railPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><button id="railNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+    </div>
+    <div class="rail-wrap">
+      <div class="rail" id="rail">
+        <a class="card rv" href="#contact" style="transition-delay:.05s"><img src="assets/dubai.jpg" alt="Dubai skyline at dusk"><span class="pin">7h direct</span><div class="meta"><small>United Arab Emirates</small><h3>Dubai</h3><p>Flights, hotel and desert safari packages</p></div></a>
+        <a class="card rv" href="#contact" style="transition-delay:.1s"><img src="assets/lagos.jpg" alt="Lagos bridge at dusk"><span class="pin">6h 30m direct</span><div class="meta"><small>Nigeria</small><h3>Lagos</h3><p>Our most-booked route, family fares available</p></div></a>
+        <a class="card rv" href="#contact" style="transition-delay:.15s"><img src="assets/paris.jpg" alt="Paris rooftops with the Eiffel Tower"><span class="pin">Weekend break</span><div class="meta"><small>France</small><h3>Paris</h3><p>City breaks by air or Eurostar</p></div></a>
+        <a class="card rv" href="#contact" style="transition-delay:.2s"><img src="assets/maldives.jpg" alt="Overwater villa in the Maldives"><span class="pin">Honeymoon</span><div class="meta"><small>Indian Ocean</small><h3>Maldives</h3><p>Overwater villas and all-inclusive resorts</p></div></a>
+        <a class="card rv" href="#contact" style="transition-delay:.25s"><img src="assets/newyork.jpg" alt="Brooklyn Bridge at sunrise"><span class="pin">ESTA guidance</span><div class="meta"><small>United States</small><h3>New York</h3><p>Flights, hotels and show tickets</p></div></a>
+        <a class="card rv" href="#contact" style="transition-delay:.3s"><img src="assets/istanbul.jpg" alt="Istanbul skyline at golden hour"><span class="pin">Visa on arrival</span><div class="meta"><small>Türkiye</small><h3>Istanbul</h3><p>Culture, food and Bosphorus stays</p></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap grid">
+    <div class="stat rv"><b><span class="count" data-to="4800">0</span>+</b><span>Travellers helped</span></div>
+    <div class="stat rv" style="transition-delay:.08s"><b><span class="count" data-to="60">0</span>+</b><span>Countries booked</span></div>
+    <div class="stat rv" style="transition-delay:.16s"><b><span class="count" data-to="10">0</span></b><span>Years in London</span></div>
+    <div class="stat rv" style="transition-delay:.24s"><b><span class="count" data-to="98">0</span>%</b><span>Would book again</span></div>
+  </div>
+</div>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="rv" style="max-width:720px">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h2">Three steps from idea <em>to boarding pass.</em></h2>
+      <p class="lead">No forms to fight with. Tell us your plans in whatever way is easiest, and we come back with options.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="n">1</div><h3>Tell us the trip</h3><p>Send a message on WhatsApp, call us, or use the enquiry form below. Where, when, who’s travelling and a rough budget is enough to start.</p></div>
+      <div class="step rv" style="transition-delay:.1s"><div class="n">2</div><h3>We send options</h3><p>Within one working day you get two or three clear itineraries with prices, airlines, hotels and what’s included. We adjust until it’s right.</p></div>
+      <div class="step rv" style="transition-delay:.2s"><div class="n">3</div><h3>We book it for you</h3><p>Once you approve, we make the bookings, handle visa paperwork if needed, and send everything in one tidy travel pack.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testi">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Client stories</span>
+      <h2 class="h2">What travellers <em>say about us.</em></h2>
+    </div>
+    <div class="quote-wrap rv rv-scale" id="quotes">
+      <div class="quote active"><div><div class="stars">★★★★★</div><p>Gina found us a family fare to Lagos that was nearly £400 cheaper than anything I could see online, and sorted the seats so the kids were together.</p></div><div class="who"><span class="av">A</span><div><b>Adaeze O.</b><span>Croydon · Family trip to Lagos</span></div></div></div>
+      <div class="quote"><div><div class="stars">★★★★★</div><p>My Schengen visa was refused once before. This time they checked every document, booked the appointment and it came back approved in nine days.</p></div><div class="who"><span class="av">M</span><div><b>Marcus B.</b><span>Walthamstow · Visa assistance</span></div></div></div>
+      <div class="quote"><div><div class="stars">★★★★★</div><p>Honeymoon in the Maldives, all planned over two WhatsApp calls. The hotel upgrade on arrival was a lovely surprise we didn’t ask for.</p></div><div class="who"><span class="av">P</span><div><b>Priya &amp; Daniel</b><span>Ilford · Honeymoon package</span></div></div></div>
+      <div class="quote"><div><div class="stars">★★★★★</div><p>Our flight was cancelled at 5am. One message and we were rebooked before we’d even finished breakfast. That’s why I use an agent.</p></div><div class="who"><span class="av">T</span><div><b>Tunde A.</b><span>Peckham · Business travel</span></div></div></div>
+    </div>
+    <div class="dots" id="dots" role="tablist" aria-label="Testimonials"></div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Good to know</span>
+      <h2 class="h2">Questions we get <em>every week.</em></h2>
+    </div>
+    <div class="faq-list">
+      <details class="rv" open><summary>Can I book directly on this website?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">No. We are a consultant-led agency, so every booking is made by us on your behalf after you have approved the itinerary and price. Send an enquiry and we’ll come back with options.</div></details>
+      <details class="rv"><summary>Do you charge a fee for quotes?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">Quotes are free. A small service fee applies to some bookings, such as complex multi-city itineraries and visa assistance, and we always tell you the fee before you commit.</div></details>
+      <details class="rv"><summary>Which visas can you help with?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">UK visitor and family visas, Schengen, USA (ESTA and B1/B2), Canada, UAE, Türkiye, Nigeria and Ghana are the most common. We guide you through requirements and check your application; the decision is always made by the embassy.</div></details>
+      <details class="rv"><summary>Is my money protected?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">Package holidays we arrange are booked through accredited, financially protected partners. For flight-only bookings we issue tickets through licensed consolidators and recommend travel insurance, which we can also arrange.</div></details>
+      <details class="rv"><summary>How quickly will I hear back?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">WhatsApp messages are usually answered within the hour during office hours (Mon–Sat, 9am–7pm UK time). Full itineraries and quotes are sent within one working day.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="rv rv-l">
+      <span class="eyebrow">Get in touch</span>
+      <h2 class="h2">Tell us where <em>you’re going.</em></h2>
+      <p class="lead">Call, message or send the form. A consultant will reply with options, not an automated email.</p>
+      <div class="contact-info">
+        <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.4-8.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 0 1 2.1 12C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 7 2.9a9.8 9.8 0 0 1 2.9 7c0 5.4-4.5 9.8-9.9 9.8zm5.4-7.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg></span><div><b>WhatsApp / Call</b><span><a href="#" data-wa="Hello Gina’s Travel, I’d like to ask about a trip.">+44 7432 112769</a> · <a href="tel:+447432112769">Call</a></span><br><span>Mon–Sat, 9am–7pm UK time</span></div></div>
+        <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span><div><b>Instagram</b><span><a href="https://www.instagram.com/ginatravelagency.uk" target="_blank" rel="noopener">@ginatravelagency.uk</a></span></div></div>
+        <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><b>Based in London</b><span>United Kingdom · Serving clients nationwide</span></div></div>
+      </div>
+    </div>
+    <form class="form rv rv-r" id="enquiry" novalidate>
+      <h3>Request a quote</h3>
+      <div class="field"><label>What do you need?</label>
+        <div class="chips" id="chips">
+          <button type="button" class="chip" aria-pressed="true">Flights</button>
+          <button type="button" class="chip" aria-pressed="false">Tour package</button>
+          <button type="button" class="chip" aria-pressed="false">Hotel</button>
+          <button type="button" class="chip" aria-pressed="false">Visa</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name" placeholder="Full name"></div>
+        <div class="field"><label for="f-phone">Phone or WhatsApp</label><input id="f-phone" name="phone" required autocomplete="tel" placeholder="+44 …"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="f-from">Flying from</label><input id="f-from" name="from" placeholder="London (any airport)"></div>
+        <div class="field"><label for="f-to">Going to</label><input id="f-to" name="to" placeholder="e.g. Lagos, Dubai"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="f-date">Travel dates</label><input id="f-date" name="dates" placeholder="e.g. 12–26 Dec, flexible"></div>
+        <div class="field"><label for="f-pax">Travellers</label><select id="f-pax" name="pax"><option>1 adult</option><option>2 adults</option><option>2 adults, 1 child</option><option>2 adults, 2 children</option><option>Group (5+)</option></select></div>
+      </div>
+      <div class="field"><label for="f-notes">Anything else?</label><textarea id="f-notes" name="notes" placeholder="Budget, preferred airline, visa questions…"></textarea></div>
+      <button class="btn btn-primary" type="submit" id="submitBtn" style="justify-content:center">Send enquiry</button>
+      <p class="note">Sending opens WhatsApp with your details filled in. We reply within one working day. No payment is taken on this website.</p>
+    </form>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="rv"><h2>Ready when you are.</h2><p>Message us on WhatsApp with your dates and destination and we’ll start pricing straight away.</p></div>
+    <div class="rv rv-r"><a class="btn btn-primary" href="#contact" data-wa="Hello Gina’s Travel, I’d like a quote for a trip.">WhatsApp +44 7432 112769</a></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#top"><span class="g"><svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span>ina’s<small>Travel Agency</small></a>
+        <p style="margin-top:16px;max-width:36ch">Independent travel agency in London. Flights, tour packages, hotels and visa assistance, booked by people who travel.</p>
+      </div>
+      <div><h4>Services</h4><ul><li><a href="#services">Flight booking</a></li><li><a href="#services">Tour packages</a></li><li><a href="#services">Hotel reservations</a></li><li><a href="#services">Visa assistance</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#about">About</a></li><li><a href="#destinations">Destinations</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="#" data-wa="Hello Gina’s Travel, I’d like to ask about a trip.">+44 7432 112769</a></li><li><a href="https://www.instagram.com/ginatravelagency.uk" target="_blank" rel="noopener">@ginatravelagency.uk</a></li><li>London, United Kingdom</li><li>Mon–Sat, 9am–7pm</li></ul></div>
+    </div>
+    <div class="fbottom"><span>© <span id="year"></span> Gina’s Travel Agency. All rights reserved.</span><span>Bookings are made by our consultants, not through this website.</span></div>
+  </div>
+</footer>
+
+<a class="wa" href="#contact" data-wa="Hello Gina’s Travel, I’d like to ask about a trip." aria-label="Contact us on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.4-8.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 0 1 2.1 12C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 7 2.9a9.8 9.8 0 0 1 2.9 7c0 5.4-4.5 9.8-9.9 9.8zm5.4-7.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg></a>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const WA = 'https://wa.me/447432112769';
+  document.documentElement.classList.add('js');
+  // Point every WhatsApp link at the agency number
+  document.querySelectorAll('a[data-wa]').forEach(a=>{ a.href = WA + '?text=' + encodeURIComponent(a.dataset.wa); a.target='_blank'; a.rel='noopener'; });
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', ()=>{ const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+  nav.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+  // Scroll: progress, nav state, hero parallax
+  const prog = document.getElementById('progress');
+  const heroImg = document.getElementById('heroImg');
+  const hero = document.getElementById('hero');
+  function onScroll(){
+    const y = scrollY;
+    const h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.width = (h>0 ? (y/h)*100 : 0) + '%';
+    nav.classList.toggle('solid', y > 40);
+    if(!reduce && y < hero.offsetHeight){
+      heroImg.style.transform = 'scale(1.08) translateY(' + (y*0.25) + 'px)';
+    }
+  }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+  const rvs = [...document.querySelectorAll('.rv')];
+  rvs.forEach(el=>io.observe(el));
+  // Belt and braces: also reveal anything already inside the viewport on load, scroll and resize,
+  // so a slow connection or a hash link never leaves a section hidden.
+  function revealVisible(){
+    const vh = innerHeight, vw = innerWidth;
+    rvs.forEach(el=>{
+      if(el.classList.contains('in')) return;
+      const r = el.getBoundingClientRect();
+      if(r.bottom > 0 && r.top < vh && r.right > 0 && r.left < vw){ el.classList.add('in'); io.unobserve(el); }
+    });
+  }
+  let rvTick = false;
+  const onRv = ()=>{ if(rvTick) return; rvTick = true; requestAnimationFrame(()=>{ revealVisible(); rvTick = false; }); };
+  addEventListener('scroll', onRv, {passive:true});
+  addEventListener('resize', onRv);
+  addEventListener('load', revealVisible);
+  setTimeout(revealVisible, 300); setTimeout(revealVisible, 1500);
+
+  // Counters
+  const cio = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target, to = +el.dataset.to, t0 = performance.now(), dur = reduce ? 1 : 1800;
+      (function tick(now){
+        const p = Math.min(1,(now-t0)/dur), ease = 1-Math.pow(1-p,3);
+        el.textContent = Math.round(to*ease).toLocaleString('en-GB');
+        if(p<1) requestAnimationFrame(tick);
+      })(t0);
+      cio.unobserve(el);
+    });
+  }, {threshold:.6});
+  document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+
+  // Service card tilt
+  if(!reduce && matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.svc').forEach(card=>{
+      card.addEventListener('mousemove', e=>{
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+        card.style.transform = `perspective(900px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+    });
+  }
+
+  // Destinations rail: buttons + drag
+  const rail = document.getElementById('rail');
+  const step = ()=> rail.querySelector('.card').getBoundingClientRect().width + 20;
+  document.getElementById('railNext').addEventListener('click',()=>rail.scrollBy({left:step(),behavior:'smooth'}));
+  document.getElementById('railPrev').addEventListener('click',()=>rail.scrollBy({left:-step(),behavior:'smooth'}));
+  rail.addEventListener('scroll', onRv, {passive:true});
+  let down=false, sx=0, sl=0, moved=false;
+  rail.addEventListener('pointerdown', e=>{ if(e.pointerType==='touch') return; down=true; moved=false; sx=e.clientX; sl=rail.scrollLeft; rail.classList.add('dragging'); });
+  addEventListener('pointermove', e=>{ if(!down) return; const dx=e.clientX-sx; if(Math.abs(dx)>4) moved=true; rail.scrollLeft = sl-dx; });
+  addEventListener('pointerup', ()=>{ down=false; rail.classList.remove('dragging'); });
+  rail.addEventListener('click', e=>{ if(moved){ e.preventDefault(); } }, true);
+
+  // Testimonials
+  const quotes = [...document.querySelectorAll('#quotes .quote')];
+  const dots = document.getElementById('dots');
+  let qi = 0, timer;
+  quotes.forEach((_,i)=>{ const b=document.createElement('button'); b.setAttribute('role','tab'); b.setAttribute('aria-label','Testimonial '+(i+1)); b.addEventListener('click',()=>{show(i); restart();}); dots.appendChild(b); });
+  function show(i){ qi=i; quotes.forEach((q,k)=>q.classList.toggle('active',k===i)); [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i)); }
+  function restart(){ clearInterval(timer); if(!reduce) timer=setInterval(()=>show((qi+1)%quotes.length),5500); }
+  show(0); restart();
+
+  // Chips
+  document.querySelectorAll('#chips .chip').forEach(c=>c.addEventListener('click',()=>c.setAttribute('aria-pressed', c.getAttribute('aria-pressed')!=='true')));
+
+  // Form (no backend on this site: show confirmation)
+  const form = document.getElementById('enquiry');
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const name = form.querySelector('#f-name'), phone = form.querySelector('#f-phone');
+    let ok = true;
+    [name,phone].forEach(f=>{ const bad = !f.value.trim(); f.style.borderColor = bad ? '#D64545' : ''; if(bad) ok=false; });
+    if(!ok){ (name.value.trim()?phone:name).focus(); return; }
+    const first = name.value.trim().split(' ')[0];
+    // Build the enquiry as a WhatsApp message and open it in a new tab.
+    const v = id => (form.querySelector('#'+id)?.value || '').trim();
+    const needs = [...form.querySelectorAll('#chips .chip[aria-pressed="true"]')].map(c=>c.textContent.trim()).join(', ') || 'Not specified';
+    const lines = [
+      'Hello Gina’s Travel, I’d like a quote.',
+      'Need: ' + needs,
+      'Name: ' + v('f-name'),
+      'Phone: ' + v('f-phone'),
+      'From: ' + (v('f-from') || 'London'),
+      'To: ' + (v('f-to') || 'Not sure yet'),
+      'Dates: ' + (v('f-date') || 'Flexible'),
+      'Travellers: ' + v('f-pax'),
+      v('f-notes') ? 'Notes: ' + v('f-notes') : ''
+    ].filter(Boolean).join('\n');
+    const url = WA + '?text=' + encodeURIComponent(lines);
+    window.open(url, '_blank', 'noopener');
+    form.innerHTML = `<div class="success"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><h3>Thanks, ${first.replace(/[<>&]/g,'')}.</h3><p class="lead" style="text-align:center">Your enquiry has opened in WhatsApp. Press send there and a consultant will reply within one working day.</p><p class="note">WhatsApp didn’t open? <a href="${url}" target="_blank" rel="noopener">Tap here to send it</a> or message +44 7432 112769.</p></div>`;
+  });
+
+  // Hero sky canvas: drifting soft particles
+  const cv = document.getElementById('sky');
+  if(cv && !reduce){
+    const ctx = cv.getContext('2d');
+    let w,h,pts=[];
+    function size(){ w = cv.width = hero.clientWidth; h = cv.height = hero.clientHeight; pts = Array.from({length: Math.round(w/14)}, ()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.8+.4,s:Math.random()*.25+.08,a:Math.random()*.6+.2})); }
+    size(); addEventListener('resize', size);
+    let raf;
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of pts){
+        p.x += p.s; p.y -= p.s*.35;
+        if(p.x > w+5) p.x = -5; if(p.y < -5) p.y = h+5;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(255,220,180,'+p.a+')'; ctx.fill();
+      }
+      raf = requestAnimationFrame(draw);
+    }
+    draw();
+    document.addEventListener('visibilitychange', ()=>{ if(document.hidden) cancelAnimationFrame(raf); else draw(); });
+  }
+})();
+</script>
+</body>
+</html>

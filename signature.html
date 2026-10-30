@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Email signature – Adijat Ajayi</title>
+<style>
+  body{margin:0;background:#F3F0E9;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#141A3F;padding:32px 16px}
+  .wrap{max-width:720px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 6px}
+  p.sub{margin:0 0 22px;color:#4A5070}
+  .card{background:#fff;border:1px solid #E4E1D8;border-radius:14px;padding:28px;overflow-x:auto}
+  .btn{display:inline-block;margin-top:18px;padding:12px 22px;border-radius:999px;background:#F58A2A;color:#fff;font-weight:600;border:0;font-size:15px;cursor:pointer}
+  .btn:hover{background:#E0731A}
+  ol{color:#4A5070;line-height:1.7;padding-left:20px}
+  .ok{color:#1E7A3A;font-weight:600;margin-left:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Email signature – Adijat Ajayi</h1>
+  <p class="sub">Click “Copy signature”, then paste it into your email settings. Instructions for Zoho, Gmail and Outlook are below.</p>
+  <div class="card">
+    <div id="sig">
+<!-- ===== SIGNATURE START ===== -->
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#141A3F;">
+  <tr>
+    <td style="padding:0 18px 0 0;vertical-align:top;border-right:3px solid #F58A2A;">
+      <a href="https://ginastravel.co.uk" target="_blank" style="text-decoration:none;"><img src="https://ginastravel.co.uk/assets/logo.png" width="150" alt="Gina's Travel Agency" style="display:block;width:150px;height:auto;border:0;"></a>
+    </td>
+    <td style="padding:0 0 0 18px;vertical-align:top;">
+      <div style="font-size:17px;font-weight:bold;color:#1E2C96;">Adijat Ajayi</div>
+      <div style="font-size:13px;color:#4A5070;padding-bottom:8px;">Travel Consultant · Gina’s Travel Agency</div>
+      <div style="font-size:13px;color:#141A3F;">
+        <span style="color:#F58A2A;font-weight:bold;">T</span>&nbsp; <a href="tel:+447432112769" style="color:#141A3F;text-decoration:none;">+44 7432 112769</a> &nbsp;·&nbsp; WhatsApp<br>
+        <span style="color:#F58A2A;font-weight:bold;">E</span>&nbsp; <a href="mailto:info@ginastravel.co.uk" style="color:#141A3F;text-decoration:none;">info@ginastravel.co.uk</a><br>
+        <span style="color:#F58A2A;font-weight:bold;">W</span>&nbsp; <a href="https://ginastravel.co.uk" style="color:#1E2C96;text-decoration:none;font-weight:bold;">ginastravel.co.uk</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/ginatravelagency.uk" style="color:#1E2C96;text-decoration:none;">@ginatravelagency.uk</a>
+      </div>
+      <div style="font-size:12px;color:#8A8FA8;padding-top:8px;">London, United Kingdom &nbsp;·&nbsp; Flights · Tour packages · Hotels · Visa assistance</div>
+    </td>
+  </tr>
+</table>
+<!-- ===== SIGNATURE END ===== -->
+    </div>
+    <button class="btn" id="copy" type="button">Copy signature</button><span class="ok" id="done" hidden>Copied – now paste it into your email settings</span>
+  </div>
+
+  <h1 style="margin-top:32px;font-size:18px">Where to paste it</h1>
+  <ol>
+    <li><b>Zoho Mail (web):</b> Settings (gear icon) → Signatures → “+” → give it a name, paste into the box → Save. Then set it as default for info@ginastravel.co.uk.</li>
+    <li><b>Zoho Mail app (phone):</b> Settings → Signature → paste → Save.</li>
+    <li><b>Gmail:</b> Settings → See all settings → Signature → Create new → paste → Save changes.</li>
+    <li><b>Outlook:</b> Settings → Mail → Compose and reply → Email signature → paste → Save.</li>
+  </ol>
+</div>
+<script>
+document.getElementById('copy').addEventListener('click', async ()=>{
+  const el = document.getElementById('sig');
+  const html = el.innerHTML, text = el.innerText;
+  try{
+    if(navigator.clipboard && window.ClipboardItem){
+      await navigator.clipboard.write([new ClipboardItem({'text/html': new Blob([html],{type:'text/html'}), 'text/plain': new Blob([text],{type:'text/plain'})})]);
+    } else { throw new Error('no rich clipboard'); }
+  }catch(e){
+    const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); document.execCommand('copy'); sel.removeAllRanges();
+  }
+  document.getElementById('done').hidden = false;
+});
+</script>
+</body>
+</html>

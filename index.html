@@ -570,7 +570,7 @@ footer a:hover{color:var(--orange)}
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const WA = 'https://wa.me/447432112769';
-  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/info@ginastravel.co.uk';
+  const FORM_ENDPOINT = 'https://formspree.io/f/mrppallj';
   document.documentElement.classList.add('js');
   // Point every WhatsApp link at the agency number
   document.querySelectorAll('a[data-wa]').forEach(a=>{ a.href = WA + '?text=' + encodeURIComponent(a.dataset.wa); a.target='_blank'; a.rel='noopener'; });
@@ -701,7 +701,6 @@ footer a:hover{color:var(--orange)}
     // Deliver the enquiry to the agency inbox; fall back to WhatsApp if the mail relay is unreachable.
     fetch(FORM_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({
       _subject: 'Website enquiry: ' + needs + ' — ' + v('f-name'),
-      _template: 'table', _captcha: 'false',
       Need: needs, Name: v('f-name'), Phone: v('f-phone'), From: v('f-from') || 'London', To: v('f-to') || 'Not sure yet',
       Dates: v('f-date') || 'Flexible', Travellers: v('f-pax'), Notes: v('f-notes') || '-'
     })}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(()=>{

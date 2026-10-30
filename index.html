@@ -12,7 +12,8 @@
 <meta property="og:description" content="Flights, tour packages, hotel reservations and visa assistance, handled by a real travel consultant in London.">
 <meta property="og:image" content="https://ginastravel.co.uk/assets/hero.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E2C96'/%3E%3Cpath fill='%23F58A2A' transform='translate(12 12) scale(1.7)' d='M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TravelAgency","name":"Gina's Travel Agency","telephone":"+447432112769","email":"info@ginastravel.co.uk","address":{"@type":"PostalAddress","addressLocality":"London","addressCountry":"GB"},"sameAs":["https://www.instagram.com/ginatravelagency.uk"],"openingHours":"Mo-Sa 09:00-19:00"}
 </script>
@@ -63,10 +64,11 @@ button{font:inherit}
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s,box-shadow .4s,backdrop-filter .4s}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
 .nav.solid{background:rgba(251,249,245,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
-.logo{display:flex;align-items:baseline;gap:2px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--white);transition:color .4s}
-.logo .g{display:inline-grid;place-items:center;width:30px;height:30px;color:var(--orange)}
-.logo small{font-weight:500;font-size:11px;letter-spacing:.02em;margin-left:4px;opacity:.85}
-.nav.solid .logo{color:var(--blue)}
+.logo{display:inline-flex;align-items:center;text-decoration:none}
+.logo img{height:46px;width:auto;display:block}
+.logo .lg-light{display:none}
+.nav.solid .logo .lg-dark{display:none}
+.nav.solid .logo .lg-light{display:block}
 .navlinks{display:flex;gap:30px;list-style:none;margin:0;padding:0}
 .navlinks a{text-decoration:none;font-family:var(--display);font-weight:500;font-size:14px;color:rgba(255,255,255,.88);position:relative;padding:6px 0;transition:color .4s}
 .navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--orange);transition:width .3s}
@@ -77,6 +79,7 @@ button{font:inherit}
 .nav.solid .burger{color:var(--blue)}
 .burger span{display:block;width:22px;height:2px;background:currentColor;margin:5px auto;transition:.3s}
 @media(max-width:900px){
+  .logo img{height:38px}
   .navlinks,.nav .btn{display:none}
   .burger{display:block}
   .nav.open .navlinks{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);box-shadow:0 20px 40px -20px rgba(0,0,0,.3)}
@@ -275,7 +278,7 @@ footer{background:var(--blue-ink);color:rgba(255,255,255,.75);padding-block:60px
 .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px}
 @media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.fgrid{grid-template-columns:1fr}}
-footer .logo{color:#fff;font-size:24px}
+footer .logo img{height:54px}
 footer h4{color:#fff;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
 footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
 footer a{text-decoration:none;color:rgba(255,255,255,.75);transition:color .2s}
@@ -307,9 +310,7 @@ footer a:hover{color:var(--orange)}
 
 <header class="nav" id="nav">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Gina's Travel Agency home">
-      <span class="g"><svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span>ina’s<small>Travel Agency</small>
-    </a>
+    <a class="logo" href="#top" aria-label="Gina's Travel Agency home"><img class="lg-dark" src="assets/logo-white.png" alt="Gina's Travel Agency"><img class="lg-light" src="assets/logo.png" alt=""></a>
     <ul class="navlinks">
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
@@ -507,7 +508,7 @@ footer a:hover{color:var(--orange)}
       <div class="contact-info">
         <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.5c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.4-8.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 0 1 2.1 12C2.1 6.5 6.5 2.1 12 2.1c2.6 0 5.1 1 7 2.9a9.8 9.8 0 0 1 2.9 7c0 5.4-4.5 9.8-9.9 9.8zm5.4-7.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg></span><div><b>WhatsApp / Call</b><span><a href="#" data-wa="Hello Gina’s Travel, I’d like to ask about a trip.">+44 7432 112769</a> · <a href="tel:+447432112769">Call</a></span><br><span>Mon–Sat, 9am–7pm UK time</span></div></div>
         <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span><div><b>Instagram</b><span><a href="https://www.instagram.com/ginatravelagency.uk" target="_blank" rel="noopener">@ginatravelagency.uk</a></span></div></div>
-        <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg></span><div><b>Email</b><span><a href="mailto:info@ginastravel.co.uk">info@ginastravel.co.uk</a></span></div></div>
+        <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg></span><div><b>Email</b><span><a href="mailto:info@ginastravel.co.uk">info@ginastravel.co.uk</a></span><br><span>Support: <a href="mailto:support@ginastravel.co.uk">support@ginastravel.co.uk</a></span><br><span>Sales: <a href="mailto:sales@ginastravel.co.uk">sales@ginastravel.co.uk</a></span></div></div>
         <div class="ci"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><b>Based in London</b><span>United Kingdom · Serving clients nationwide</span></div></div>
       </div>
     </div>
@@ -535,7 +536,7 @@ footer a:hover{color:var(--orange)}
       </div>
       <div class="field"><label for="f-notes">Anything else?</label><textarea id="f-notes" name="notes" placeholder="Budget, preferred airline, visa questions…"></textarea></div>
       <button class="btn btn-primary" type="submit" id="submitBtn" style="justify-content:center">Send enquiry</button>
-      <p class="note">Sending opens WhatsApp with your details filled in. We reply within one working day. No payment is taken on this website.</p>
+      <p class="note">Your enquiry goes straight to info@ginastravel.co.uk. We reply within one working day. No payment is taken on this website.</p>
     </form>
   </div>
 </section>
@@ -552,7 +553,7 @@ footer a:hover{color:var(--orange)}
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <a class="logo" href="#top"><span class="g"><svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span>ina’s<small>Travel Agency</small></a>
+        <a class="logo" href="#top"><img src="assets/logo-white.png" alt="Gina's Travel Agency"></a>
         <p style="margin-top:16px;max-width:36ch">Independent travel agency in London. Flights, tour packages, hotels and visa assistance, booked by people who travel.</p>
       </div>
       <div><h4>Services</h4><ul><li><a href="#services">Flight booking</a></li><li><a href="#services">Tour packages</a></li><li><a href="#services">Hotel reservations</a></li><li><a href="#services">Visa assistance</a></li></ul></div>
@@ -569,6 +570,7 @@ footer a:hover{color:var(--orange)}
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const WA = 'https://wa.me/447432112769';
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/info@ginastravel.co.uk';
   document.documentElement.classList.add('js');
   // Point every WhatsApp link at the agency number
   document.querySelectorAll('a[data-wa]').forEach(a=>{ a.href = WA + '?text=' + encodeURIComponent(a.dataset.wa); a.target='_blank'; a.rel='noopener'; });
@@ -693,8 +695,21 @@ footer a:hover{color:var(--orange)}
       v('f-notes') ? 'Notes: ' + v('f-notes') : ''
     ].filter(Boolean).join('\n');
     const url = WA + '?text=' + encodeURIComponent(lines);
-    window.open(url, '_blank', 'noopener');
-    form.innerHTML = `<div class="success"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><h3>Thanks, ${first.replace(/[<>&]/g,'')}.</h3><p class="lead" style="text-align:center">Your enquiry has opened in WhatsApp. Press send there and a consultant will reply within one working day.</p><p class="note">WhatsApp didn’t open? <a href="${url}" target="_blank" rel="noopener">Tap here to send it</a> or message +44 7432 112769.</p></div>`;
+    const btn = form.querySelector('#submitBtn'); btn.disabled = true; btn.textContent = 'Sending…';
+    const safeFirst = first.replace(/[<>&]/g,'');
+    const tick = '<span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>';
+    // Deliver the enquiry to the agency inbox; fall back to WhatsApp if the mail relay is unreachable.
+    fetch(FORM_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({
+      _subject: 'Website enquiry: ' + needs + ' — ' + v('f-name'),
+      _template: 'table', _captcha: 'false',
+      Need: needs, Name: v('f-name'), Phone: v('f-phone'), From: v('f-from') || 'London', To: v('f-to') || 'Not sure yet',
+      Dates: v('f-date') || 'Flexible', Travellers: v('f-pax'), Notes: v('f-notes') || '-'
+    })}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(()=>{
+      form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Your enquiry has been sent to info@ginastravel.co.uk. A consultant will reply within one working day.</p><p class="note">Need it sooner? <a href="${url}" target="_blank" rel="noopener">Send it on WhatsApp</a> or call +44 7432 112769.</p></div>`;
+    }).catch(()=>{
+      window.open(url, '_blank', 'noopener');
+      form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Email is busy right now, so your enquiry has opened in WhatsApp. Press send there and a consultant will reply within one working day.</p><p class="note">WhatsApp didn’t open? <a href="${url}" target="_blank" rel="noopener">Tap here to send it</a> or email info@ginastravel.co.uk.</p></div>`;
+    });
   });
 
   // Hero sky canvas: drifting soft particles

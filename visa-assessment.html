@@ -192,6 +192,27 @@ const WA = 'https://wa.me/447432112769';
 const KEY = 'ginas-visa-assessment-v3';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const yesno = ['Yes','No'];
+const INCOME_BANDS = {
+  'GBP £':['Under £500','£500 – £1,000','£1,000 – £2,000','£2,000 – £3,500','£3,500 – £5,000','Over £5,000','No regular income'],
+  'USD $':['Under $600','$600 – $1,200','$1,200 – $2,500','$2,500 – $4,500','$4,500 – $6,500','Over $6,500','No regular income'],
+  'CAD $':['Under CA$800','CA$800 – CA$1,700','CA$1,700 – CA$3,400','CA$3,400 – CA$6,000','CA$6,000 – CA$8,500','Over CA$8,500','No regular income'],
+  'EUR €':['Under €600','€600 – €1,200','€1,200 – €2,300','€2,300 – €4,000','€4,000 – €6,000','Over €6,000','No regular income'],
+  'NGN ₦':['Under ₦150,000','₦150,000 – ₦300,000','₦300,000 – ₦600,000','₦600,000 – ₦1,000,000','₦1,000,000 – ₦2,500,000','Over ₦2,500,000','No regular income'],
+  'GHS ₵':['Under ₵3,000','₵3,000 – ₵6,000','₵6,000 – ₵12,000','₵12,000 – ₵25,000','₵25,000 – ₵50,000','Over ₵50,000','No regular income'],
+  'AED':['Under AED 3,000','AED 3,000 – 6,000','AED 6,000 – 12,000','AED 12,000 – 25,000','AED 25,000 – 50,000','Over AED 50,000','No regular income'],
+  'Other':['Under the equivalent of £500','£500 – £1,000 equivalent','£1,000 – £2,000 equivalent','£2,000 – £3,500 equivalent','£3,500 – £5,000 equivalent','Over £5,000 equivalent','No regular income'],
+};
+function guessCurrency(country){
+  const c = String(country||'').toLowerCase();
+  if(/nigeria|lagos|abuja/.test(c)) return 'NGN ₦';
+  if(/united kingdom|\buk\b|england|scotland|wales|northern ireland|london|britain/.test(c)) return 'GBP £';
+  if(/ghana|accra/.test(c)) return 'GHS ₵';
+  if(/united states|\busa?\b|america|new york|texas|california/.test(c)) return 'USD $';
+  if(/canada|toronto|ontario/.test(c)) return 'CAD $';
+  if(/uae|emirates|dubai|abu dhabi/.test(c)) return 'AED';
+  if(/ireland|france|germany|spain|italy|netherlands|belgium|portugal|austria|greece|finland|cyprus|malta|luxembourg|slovakia|slovenia|estonia|latvia|lithuania|croatia/.test(c)) return 'EUR €';
+  return '';
+}
 const STEPS = [
  {id:'about', title:'About you', no:'Step 1 of 7', img:'assets/passport.jpg', text:'The basics the embassy will ask for first.', fields:[
   {id:'fullName',label:'Full name (as on passport)',type:'text',req:true,half:true},
@@ -236,9 +257,9 @@ const STEPS = [
   {id:'employedSince',label:'Since when? (month/year)',type:'text',half:true,showIf:{employment:['Employed','Self-employed','Business owner']}},
   {id:'leaveApproved',label:'Has your employer approved leave for the trip?',type:'choices',options:['Yes','Not yet','Not asked'],showIf:{employment:['Employed']}},
   {id:'institution',label:'School / university and course',type:'text',req:true,showIf:{employment:['Student']}},
-  {id:'incomeBand',label:'Monthly income (after tax)',type:'select',req:true,half:true,options:['Under £500','£500 – £1,000','£1,000 – £2,000','£2,000 – £3,500','£3,500 – £5,000','Over £5,000','No regular income']},
-  {id:'currency',label:'Currency of your income / savings',type:'select',req:true,half:true,options:['GBP £','NGN ₦','USD $','EUR €','GHS ₵','AED','Other']},
-  {id:'savings',label:'Amount saved for this trip',type:'text',req:true,half:true,hint:'Approximate figure in the currency above'},
+  {id:'currency',label:'Which currency do you earn and save in?',type:'select',req:true,options:['GBP £','NGN ₦','USD $','EUR €','GHS ₵','AED','CAD $','Other'],hint:'We have guessed from the country you live in. Change it if that is wrong.'},
+  {id:'incomeBand',label:'Monthly income (after tax)',type:'select',req:true,options:st=>INCOME_BANDS[st.currency]||INCOME_BANDS.Other},
+  {id:'savings',label:st=>'Amount saved for this trip ('+(st.currency||'your currency').replace(/^(\w+).*/,'$1')+')',type:'text',req:true,half:true,hint:'Approximate figure'},
   {id:'savingsAge',label:'How long has that money been in your account?',type:'select',req:true,half:true,options:['Less than 1 month','1 – 3 months','3 – 6 months','More than 6 months']},
   {id:'bankStatements',label:'Can you provide 6 months of bank statements?',type:'choices',req:true,options:['Yes','Only 3 months','No']},
   {id:'otherAssets',label:'Other income or assets (property, rent, investments, pension)',type:'textarea',hint:'Leave blank if none'},
@@ -334,6 +355,8 @@ const stage = $('#stage');
 function visible(f){ if(!f.showIf) return true; return Object.entries(f.showIf).every(([k,vals])=>{ const v = state[k]; return Array.isArray(v) ? v.some(x=>vals.includes(x)) : vals.includes(v); }); }
 function screenVisible(sc){ return sc.type!=='q' || sc.fields.some(visible); }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+const opts = f => typeof f.options==='function' ? f.options(state) : f.options;
+const lab = f => typeof f.label==='function' ? f.label(state) : f.label;
 function qNumber(i){ let n=0; for(let k=0;k<=i;k++){ if(SCREENS[k].type==='q' && screenVisible(SCREENS[k])) n++; } return n; }
 function qCount(){ return SCREENS.filter(s=>s.type==='q' && screenVisible(s)).length; }
 function firstOf(si){ return SCREENS.findIndex(sc=>sc.type==='section' && sc.si===si); }
@@ -364,14 +387,14 @@ function html(sc){
       const v = state[f.id]; const req = f.req ? ' <span class="req">*</span>' : '';
       let ctl='';
       if(f.type==='textarea') ctl = `<textarea class="in" data-id="${f.id}" rows="3" placeholder="Type your answer…">${esc(v)}</textarea>`;
-      else if(f.type==='select'||f.type==='choices'||f.type==='multi'){ const multi = f.type==='multi'; const arr = multi ? (Array.isArray(v)?v:[]) : (v?[v]:[]); const shown = multi ? (arr.length? (arr.length===1?arr[0]:arr.length+' selected') : '') : (v||''); ctl = `<div class="dd${multi?' multi':''}" data-id="${f.id}" data-multi="${multi?1:0}"><button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false"><span class="${shown?'':'ph'}">${shown?esc(shown):(multi?'Select all that apply':'Choose an option')}</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button><div class="dd-menu" role="listbox">${f.options.map((o,i)=>`<button type="button" class="dd-opt" role="option" data-val="${esc(o)}" aria-selected="${arr.includes(o)}"><span class="key">${String.fromCharCode(65+i)}</span><span>${esc(o)}</span><span class="chk">${TICK}</span></button>`).join('')}</div></div>`; }
+      else if(f.type==='select'||f.type==='choices'||f.type==='multi'){ const multi = f.type==='multi'; const arr = multi ? (Array.isArray(v)?v:[]) : (v?[v]:[]); const shown = multi ? (arr.length? (arr.length===1?arr[0]:arr.length+' selected') : '') : (v||''); ctl = `<div class="dd${multi?' multi':''}" data-id="${f.id}" data-multi="${multi?1:0}"><button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false"><span class="${shown?'':'ph'}">${shown?esc(shown):(multi?'Select all that apply':'Choose an option')}</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button><div class="dd-menu" role="listbox">${opts(f).map((o,i)=>`<button type="button" class="dd-opt" role="option" data-val="${esc(o)}" aria-selected="${arr.includes(o)}"><span class="key">${String.fromCharCode(65+i)}</span><span>${esc(o)}</span><span class="chk">${TICK}</span></button>`).join('')}</div></div>`; }
       else ctl = `<input class="in" data-id="${f.id}" type="${f.type}" value="${esc(v)}" placeholder="${f.type==='email'?'name@example.com':f.type==='tel'?'+44 …':f.type==='number'?'e.g. 14':'Type your answer…'}"${f.type==='number'?' min="1" max="365"':''}>`;
-      return `<div class="fld" data-field="${f.id}">${one?'':`<span class="sub">${esc(f.label)}${req}</span>`}${ctl}<div class="errmsg">${f.type==='email'?'Please enter a valid email address.':'This answer is needed to continue.'}</div></div>`;
+      return `<div class="fld" data-field="${f.id}">${one?'':`<span class="sub">${esc(lab(f))}${req}</span>`}${ctl}<div class="errmsg">${f.type==='email'?'Please enter a valid email address.':'This answer is needed to continue.'}</div></div>`;
     }).join('');
-    const label = one ? esc(fs[0].label) + (fs[0].req?' <span class="req">*</span>':'') : fs.map(f=>esc(f.label)).join(' <span style="color:var(--orange)">&amp;</span> ') + (fs.some(f=>f.req)?' <span class="req">*</span>':'');
+    const label = one ? esc(lab(fs[0])) + (fs[0].req?' <span class="req">*</span>':'') : fs.map(f=>esc(lab(f))).join(' <span style="color:var(--orange)">&amp;</span> ') + (fs.some(f=>f.req)?' <span class="req">*</span>':'');
     const hint = one && fs[0].hint ? `<p class="hint">${esc(fs[0].hint)}</p>` : '';
     const auto = one && (fs[0].type==='choices'||fs[0].type==='select');
-    return `${header(sc)}<div class="body"><h2 class="q">${label}</h2>${hint}<div class="ans${one?'':' two'}">${body}</div><div class="cta"><button class="ok" data-act="next">${auto?'Continue':'OK'} ${ARROW}</button><span class="kbd">${auto?`pick from the list, or press <b>A</b>–<b>${String.fromCharCode(64+fs[0].options.length)}</b>`:'or press <b>Enter ↵</b>'}</span></div></div>`;
+    return `${header(sc)}<div class="body"><h2 class="q">${label}</h2>${hint}<div class="ans${one?'':' two'}">${body}</div><div class="cta"><button class="ok" data-act="next">${auto?'Continue':'OK'} ${ARROW}</button><span class="kbd">${auto?`pick from the list, or press <b>A</b>–<b>${String.fromCharCode(64+opts(fs[0]).length)}</b>`:'or press <b>Enter ↵</b>'}</span></div></div>`;
   }
   if(sc.type==='review'){
     const blocks = answers().map(s=>`<div class="rv"><h3>${esc(s.section)}<button type="button" data-goto="${s.first}">Edit</button></h3><dl>${s.items.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div>`).join('');
@@ -379,13 +402,14 @@ function html(sc){
   }
 }
 function answers(){
-  return STEPS.map((S,si)=>({section:S.title, first:SCREENS.findIndex(sc=>sc.type==='q' && sc.si===si), items:S.fields.filter(visible).map(f=>{ const v = state[f.id]; const txt = Array.isArray(v)?v.join(', '):(v||''); return [f.label, txt]; }).filter(([,v])=>v.trim()!=='')}));
+  return STEPS.map((S,si)=>({section:S.title, first:SCREENS.findIndex(sc=>sc.type==='q' && sc.si===si), items:S.fields.filter(visible).map(f=>{ const v = state[f.id]; const txt = Array.isArray(v)?v.join(', '):(v||''); return [lab(f), txt]; }).filter(([,v])=>v.trim()!=='')}));
 }
 
 function show(i, dir){
   if(animating) return; dir = dir || 'fwd';
   while(i>0 && i<SCREENS.length-1 && !screenVisible(SCREENS[i])) i += (dir==='back'?-1:1);
   idx = i; const sc = SCREENS[idx];
+  if(sc.type==='q' && sc.fields.some(f=>f.id==='currency') && !state.currency){ state.currency = guessCurrency(state.residence); }
   document.querySelectorAll('body > .parts-menu').forEach(m=>m.remove());
   const el = document.createElement('div'); el.className = 'card enter' + (dir==='back'?' back':''); el.innerHTML = html(sc);
   const old = current; current = el; animating = true;
@@ -421,7 +445,7 @@ function bind(el, sc){
     dd.querySelectorAll('.dd-opt').forEach(o=>o.addEventListener('click', ()=>{
       const val = o.dataset.val;
       if(multi){ let arr = Array.isArray(state[id])?[...state[id]]:[]; if(val.startsWith('None')) arr = arr.includes(val)?[]:[val]; else { arr = arr.filter(x=>!x.startsWith('None')); arr = arr.includes(val)?arr.filter(x=>x!==val):[...arr,val]; } state[id]=arr; refresh(); }
-      else { state[id]=val; refresh(); open(false); }
+      else { if(id==='currency' && state.currency!==val) delete state.incomeBand; state[id]=val; refresh(); open(false); }
       dd.closest('.fld').classList.remove('err'); save();
       if(!multi && sc.fields.filter(visible).length===1) setTimeout(advance, 380);
     }));

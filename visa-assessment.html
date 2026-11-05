@@ -325,7 +325,7 @@ function html(sc){
       else ctl = `<input class="in" data-id="${f.id}" type="${f.type}" value="${esc(v)}" placeholder="${f.type==='email'?'name@example.com':f.type==='tel'?'+44 …':f.type==='number'?'e.g. 14':'Type your answer…'}"${f.type==='number'?' min="1" max="365"':''}>`;
       return `<div class="fld" data-field="${f.id}">${one?'':`<span class="sub">${esc(f.label)}${req}</span>`}${ctl}<div class="errmsg">${f.type==='email'?'Please enter a valid email address.':'This answer is required to continue.'}</div></div>`;
     }).join('');
-    const label = one ? esc(fs[0].label) + (fs[0].req?' <span class="req">*</span>':'') : esc(sc.step.title) + ' <span class="req">*</span>';
+    const label = one ? esc(fs[0].label) + (fs[0].req?' <span class="req">*</span>':'') : fs.map(f=>esc(f.label)).join(' <span style="color:var(--orange)">&amp;</span> ') + (fs.some(f=>f.req)?' <span class="req">*</span>':'');
     const hint = one && fs[0].hint ? `<p class="hint">${esc(fs[0].hint)}</p>` : '';
     const needsOk = !(one && fs[0].type==='choices');
     return `<div class="qno">${n} → ${qCount()}</div><h2 class="q">${label}</h2>${hint}<div class="ans${one?'':' two'}">${body}</div><div class="okrow">${needsOk?`<button class="ok" data-act="next">OK <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></button><span class="kbd">press <b>Enter ↵</b></span>`:`<span class="kbd">pick one, or press <b>A</b>–<b>${String.fromCharCode(64+fs[0].options.length)}</b></span>`}</div>`;

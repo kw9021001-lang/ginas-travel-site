@@ -21,12 +21,21 @@ p{margin:0}
 button{font:inherit}
 :focus-visible{outline:3px solid var(--orange);outline-offset:3px}
 
-/* ambient background: two soft brand blobs drifting */
-.blob{position:fixed;z-index:0;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
-.blob.b1{width:52vw;height:52vw;max-width:720px;max-height:720px;background:radial-gradient(circle,#C7CEFF,transparent 65%);top:-18vw;left:-14vw}
-.blob.b2{width:46vw;height:46vw;max-width:640px;max-height:640px;background:radial-gradient(circle,#FFD6B3,transparent 65%);bottom:-16vw;right:-12vw;animation-delay:-9s}
-@keyframes drift{to{transform:translate(4vw,3vw) scale(1.08)}}
-.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:radial-gradient(rgba(20,31,110,.06) 1px,transparent 1px);background-size:22px 22px}
+/* animated background: colour mesh + three drifting blobs + bokeh canvas + paper plane */
+.mesh{position:fixed;inset:-10%;z-index:0;pointer-events:none;background:linear-gradient(120deg,#FBF9F5,#EEF0FF 30%,#FFF3E6 55%,#F3F0E9 80%,#E9ECFF);background-size:300% 300%;animation:mesh 22s ease-in-out infinite alternate}
+@keyframes mesh{from{background-position:0% 0%}to{background-position:100% 100%}}
+.blob{position:fixed;z-index:0;border-radius:50%;filter:blur(70px);opacity:.75;pointer-events:none;mix-blend-mode:multiply}
+.blob.b1{width:56vw;height:56vw;max-width:760px;max-height:760px;background:radial-gradient(circle,#B9C2FF,transparent 62%);top:-20vw;left:-16vw;animation:b1 26s ease-in-out infinite alternate}
+.blob.b2{width:50vw;height:50vw;max-width:680px;max-height:680px;background:radial-gradient(circle,#FFC89A,transparent 62%);bottom:-18vw;right:-14vw;animation:b2 30s ease-in-out infinite alternate}
+.blob.b3{width:34vw;height:34vw;max-width:460px;max-height:460px;background:radial-gradient(circle,#FFE0C2,transparent 62%);top:30%;left:55%;animation:b3 20s ease-in-out infinite alternate}
+@keyframes b1{to{transform:translate(18vw,14vh) scale(1.18)}}
+@keyframes b2{to{transform:translate(-16vw,-18vh) scale(1.12)}}
+@keyframes b3{to{transform:translate(-28vw,22vh) scale(.85)}}
+.bokeh{position:fixed;inset:0;z-index:0;pointer-events:none}
+.plane{position:fixed;z-index:1;pointer-events:none;width:38px;height:38px;color:var(--blue);opacity:0;offset-path:path("M -60 520 C 300 380, 700 620, 1100 300 S 1700 160, 2100 320");offset-rotate:auto;animation:fly 16s linear infinite;animation-delay:3s}
+.plane svg{width:100%;height:100%;filter:drop-shadow(0 8px 14px rgba(20,31,110,.25))}
+@keyframes fly{0%{offset-distance:0%;opacity:0}6%{opacity:.85}40%{opacity:.85}48%{offset-distance:100%;opacity:0}100%{offset-distance:100%;opacity:0}}
+.grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45;background-image:radial-gradient(rgba(20,31,110,.07) 1px,transparent 1px);background-size:22px 22px}
 
 /* chrome */
 .top{position:fixed;top:0;left:0;right:0;z-index:5;padding:calc(16px + env(safe-area-inset-top,0px)) clamp(16px,4vw,40px) 12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -171,7 +180,7 @@ textarea.in{min-height:110px;resize:none;font-size:17px;line-height:1.5}
 <script defer src="https://cloud.umami.is/script.js" data-website-id="5b4959e6-32c2-4901-9919-88007c4ef5a2"></script>
 </head>
 <body>
-<div class="blob b1"></div><div class="blob b2"></div><div class="grain"></div>
+<div class="mesh"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><canvas class="bokeh" id="bokeh" aria-hidden="true"></canvas><div class="grain"></div><div class="plane" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="rotate(90 12 12)"/></svg></div>
 <header class="top"><a href="/" aria-label="Gina's Travel Agency"><img src="assets/logo.png" alt="Gina's Travel Agency"></a><a class="back" href="/">Back to website</a></header>
 <main class="stage" id="stage" aria-live="polite"></main>
 <div class="foot"><button id="prev" aria-label="Previous question" title="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></button><button id="nextq" aria-label="Next question" title="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div>
@@ -181,6 +190,7 @@ textarea.in{min-height:110px;resize:none;font-size:17px;line-height:1.5}
 const FORM_ENDPOINT = 'https://formspree.io/f/mrppallj';
 const WA = 'https://wa.me/447432112769';
 const KEY = 'ginas-visa-assessment-v3';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const yesno = ['Yes','No'];
 const STEPS = [
  {id:'about', title:'About you', no:'Step 1 of 7', img:'assets/passport.jpg', text:'The basics the embassy will ask for first.', fields:[
@@ -337,7 +347,7 @@ function header(sc){
   const pct = sc.type==='review' ? 100 : Math.round(qn/total*100);
   const si = sc.si==null ? (sc.type==='review' ? STEPS.length : -1) : sc.si;
   const partsBtn = `<div class="parts"><button type="button" class="parts-btn" aria-haspopup="listbox" aria-expanded="false"><span class="n">${si>=0&&si<STEPS.length?si+1:'✓'}</span>${si>=0&&si<STEPS.length?esc(STEPS[si].title):'Review'}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="parts-menu" role="listbox">${STEPS.map((s,i)=>`<button type="button" data-part="${i}" class="${i===si?'now':(partDone(i)&&i<si?'done':'')}" ${i>si&&!partDone(i)?'disabled':''}><span class="dot">${partDone(i)&&i!==si?TICK:i+1}</span>${esc(s.title)}</button>`).join('')}</div></div>`;
-  const left = sc.type==='q' ? `<span>Question <b>${qn}</b> of ${total}</span>` : sc.type==='review' ? `<span><b>All ${total} answered</b></span>` : `<span>Part <b>${si+1}</b> of ${STEPS.length}</span>`;
+  const left = sc.type==='review' ? `<span><b>100%</b> complete</span>` : `<span><b>${pct}%</b> complete</span>`;
   return `<div class="head"><div class="bar"><i style="width:${pct}%"></i></div><div class="meta">${left}${partsBtn}</div></div>`;
 }
 function html(sc){
@@ -459,8 +469,14 @@ function send(){
   fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(()=>done(true)).catch(()=>done(false));
 }
 
+// ---- Bokeh background ------------------------------------------------------------------
+(function(){ const cv=$('#bokeh'); if(!cv || reduce) return; const ctx=cv.getContext('2d'); let w,h,ps=[]; const cols=['30,44,150','245,138,42','255,179,105','91,107,224'];
+  function size(){ w=cv.width=innerWidth; h=cv.height=innerHeight; ps=Array.from({length:Math.max(14,Math.round(w/70))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*34+10,vx:(Math.random()-.5)*.25,vy:-(Math.random()*.35+.12),c:cols[Math.random()*cols.length|0],a:Math.random()*.14+.05,t:Math.random()*6.28})); }
+  size(); addEventListener('resize',size);
+  (function draw(){ ctx.clearRect(0,0,w,h); for(const p of ps){ p.t+=.01; p.x+=p.vx+Math.sin(p.t)*.15; p.y+=p.vy; if(p.y<-p.r*2){ p.y=h+p.r*2; p.x=Math.random()*w; } if(p.x<-p.r*2) p.x=w+p.r; if(p.x>w+p.r*2) p.x=-p.r; const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r); g.addColorStop(0,'rgba('+p.c+','+p.a+')'); g.addColorStop(1,'rgba('+p.c+',0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); } requestAnimationFrame(draw); })();
+})();
+
 // ---- Confetti ---------------------------------------------------------------------------
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function confetti(){ if(reduce) return; const cv=$('#confetti'), ctx=cv.getContext('2d'); cv.width=innerWidth; cv.height=innerHeight; const cols=['#F58A2A','#FFB369','#1E2C96','#5B6BE0','#FFD6B3']; const ps=Array.from({length:170},()=>({x:innerWidth/2+(Math.random()-.5)*220,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,g:.35,r:Math.random()*6+3,c:cols[Math.random()*cols.length|0],rot:Math.random()*6,vr:(Math.random()-.5)*.3,life:1})); let t=0; (function f(){ ctx.clearRect(0,0,cv.width,cv.height); let alive=false; for(const p of ps){ p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr; p.life-=.008; if(p.life>0&&p.y<cv.height+20){ alive=true; ctx.save(); ctx.globalAlpha=Math.max(0,p.life); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.c; ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.6); ctx.restore(); } } if(alive && t++<400) requestAnimationFrame(f); else ctx.clearRect(0,0,cv.width,cv.height); })(); }
 
 // ---- Boot ----------------------------------------------------------------------------

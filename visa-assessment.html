@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visa Pre-Assessment | Gina's Travel Agency</title>
+<meta name="description" content="Answer a few questions about your trip, finances and travel history so Gina's Travel Agency can tell you how to prepare a strong visa application.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1E2C96">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+:root{--blue:#1E2C96;--blue-deep:#141F6E;--blue-ink:#0F1650;--orange:#F58A2A;--orange-deep:#E0731A;--orange-soft:#FFF1E4;--paper:#FBF9F5;--paper-2:#F3F0E9;--white:#fff;--ink:#141A3F;--ink-2:#4A5070;--line:#E4E1D8;--red:#D64545;--display:'Poppins',ui-sans-serif,system-ui,sans-serif;--body:'DM Sans',ui-sans-serif,system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:rgba(251,249,245,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1180px;margin:0 auto;padding:12px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.top img{height:40px;width:auto;display:block}
+.top a.back{font-family:var(--display);font-weight:500;font-size:14px;color:var(--blue);text-decoration:none}
+.shell{max-width:1180px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,4vw,40px) 80px}
+
+/* intro */
+.intro{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,60px);align-items:center}
+@media(max-width:860px){.intro{grid-template-columns:1fr}}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-deep);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--orange)}
+.intro h1{font-size:clamp(32px,4.6vw,54px);font-weight:700;letter-spacing:-.02em;margin-top:14px}
+.intro h1 em{font-style:normal;color:var(--orange)}
+.lead{color:var(--ink-2);font-size:17px;margin-top:16px;max-width:56ch}
+.intro ul{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px;color:var(--ink-2);font-size:15px}
+.intro li{display:flex;gap:12px;align-items:flex-start}
+.intro li b{color:var(--ink);font-family:var(--display);font-weight:600}
+.intro .tick{flex:none;width:24px;height:24px;border-radius:50%;background:var(--orange-soft);color:var(--orange-deep);display:grid;place-items:center;margin-top:1px}
+.intro .tick svg{width:13px;height:13px}
+.intro figure{margin:0;border-radius:24px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(20,31,110,.4);aspect-ratio:16/11}
+.intro figure img{width:100%;height:100%;object-fit:cover;display:block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;font-family:var(--display);font-weight:600;font-size:15px;border:0;cursor:pointer;text-decoration:none;transition:transform .2s,background .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.55;cursor:default;transform:none}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 12px 30px -10px rgba(245,138,42,.7)}
+.btn-primary:hover{background:var(--orange-deep)}
+.btn-ghost{background:transparent;color:var(--blue);border:1.5px solid var(--line)}
+.btn-ghost:hover{background:var(--white)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:var(--blue-deep)}
+.btn svg{width:18px;height:18px}
+.note{font-size:13px;color:var(--ink-2)}
+
+/* wizard */
+.wiz{display:none;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 30px 70px -40px rgba(20,31,110,.35)}
+.wiz.on{display:grid}
+@media(max-width:860px){.wiz{grid-template-columns:1fr}}
+.side{position:relative;background:var(--blue-ink);color:#fff;min-height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(22px,3vw,36px);isolation:isolate}
+.side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:opacity .5s}
+.side::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(15,22,80,.15),rgba(15,22,80,.9) 70%)}
+.side .stepno{font-family:var(--display);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#FFB369;font-weight:600}
+.side h2{font-size:clamp(24px,2.6vw,32px);font-weight:700;margin-top:8px}
+.side p{color:rgba(255,255,255,.8);margin-top:10px;font-size:15px;max-width:40ch}
+@media(max-width:860px){.side{min-height:220px;justify-content:flex-end}}
+.main{padding:clamp(22px,3.5vw,40px);display:flex;flex-direction:column;gap:22px;min-width:0}
+.progress{display:flex;align-items:center;gap:14px}
+.bar{flex:1;height:6px;border-radius:999px;background:var(--paper-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),#FFB369);border-radius:999px;transition:width .4s cubic-bezier(.2,.8,.2,1)}
+.progress span{font-family:var(--display);font-size:13px;font-weight:600;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.fields{display:grid;gap:16px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.field{display:grid;gap:7px}
+.field.hidden{display:none}
+.field label{font-family:var(--display);font-weight:500;font-size:14px;color:var(--ink)}
+.field label .req{color:var(--orange-deep)}
+.field .hint{font-size:12.5px;color:var(--ink-2);margin-top:-3px}
+.field input,.field select,.field textarea{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);background:var(--white);font:inherit;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(30,44,150,.12)}
+.field textarea{min-height:96px;resize:vertical}
+.field.err input,.field.err select,.field.err textarea,.field.err .choices{border-color:var(--red)}
+.field .msg{font-size:12.5px;color:var(--red);display:none}
+.field.err .msg{display:block}
+.choices{display:flex;flex-wrap:wrap;gap:8px;border:1.5px solid transparent;border-radius:12px}
+.choice{border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:9px 15px;font-family:var(--display);font-size:13.5px;font-weight:500;cursor:pointer;transition:.15s;user-select:none}
+.choice:hover{border-color:var(--blue)}
+.choice[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.choices.stack{flex-direction:column}
+.choices.stack .choice{border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.choices.stack .choice::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;transition:.15s}
+.choices.stack .choice[aria-pressed="true"]::before{border-color:#fff;background:radial-gradient(circle,#fff 45%,transparent 50%)}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:10px;border-top:1px solid var(--line);flex-wrap:wrap}
+.sec{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-top:6px}
+
+/* review */
+.review{display:grid;gap:18px}
+.rv-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+.rv-block h3{font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rv-block h3 button{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;font-size:13px;cursor:pointer}
+.rv-block dl{margin:12px 0 0;display:grid;grid-template-columns:minmax(120px,38%) 1fr;gap:6px 14px;font-size:14px}
+.rv-block dt{color:var(--ink-2)}
+.rv-block dd{margin:0;font-weight:500;word-break:break-word}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--ink-2)}
+.consent input{width:20px;height:20px;margin-top:2px;accent-color:var(--blue)}
+.done{text-align:center;display:grid;place-items:center;gap:12px;padding:20px 0}
+.done .ok{width:72px;height:72px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;animation:pop .5s cubic-bezier(.2,.8,.2,1)}
+.done .ok svg{width:34px;height:34px}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.done h2{font-size:26px;font-weight:700}
+.summary-box{width:100%;text-align:left;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;white-space:pre-wrap;max-height:260px;overflow:auto}
+.score{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;font-family:var(--display);font-weight:600;font-size:13px}
+.score.g{background:#E6F6EC;color:#1E7A3A}.score.a{background:var(--orange-soft);color:var(--orange-deep)}.score.r{background:#FDE8E8;color:#B33A3A}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in"><a href="/" aria-label="Gina's Travel Agency"><img src="assets/logo.png" alt="Gina's Travel Agency"></a><a class="back" href="/">← Back to website</a></div></header>
+
+<main class="shell">
+  <section class="intro" id="intro">
+    <div>
+      <span class="eyebrow">Visa assistance</span>
+      <h1>Visa <em>pre-assessment</em></h1>
+      <p class="lead">Before we advise on a visa, we need a clear picture of you, your trip and your circumstances. This takes about 10–12 minutes. Be accurate: embassies check everything, and so do we.</p>
+      <ul>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><div><b>7 short sections.</b> Your trip, family, work and finances, travel history and documents.</div></li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><div><b>Your answers are saved as you go.</b> Close the page and come back on the same device to continue.</div></li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><div><b>A consultant replies within one working day</b> with what you qualify for and the documents to prepare.</div></li>
+      </ul>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;align-items:center">
+        <button class="btn btn-primary" id="start">Start the assessment <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <span class="note">Free. No payment is taken on this website.</span>
+      </div>
+    </div>
+    <figure><img src="assets/visa-arrivals.jpg" alt="Passport and boarding pass at an arrivals hall"></figure>
+  </section>
+
+  <section class="wiz" id="wiz" aria-live="polite">
+    <aside class="side"><img id="sideImg" src="" alt=""><div><div class="stepno" id="sideNo"></div><h2 id="sideTitle"></h2><p id="sideText"></p></div></aside>
+    <div class="main">
+      <div class="progress"><div class="bar"><i id="bar"></i></div><span id="prog"></span></div>
+      <div id="fields" class="fields"></div>
+      <div class="actions">
+        <button class="btn btn-ghost" id="back" type="button">← Back</button>
+        <button class="btn btn-primary" id="next" type="button">Continue →</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+const FORM_ENDPOINT = 'https://formspree.io/f/mrppallj';
+const WA = 'https://wa.me/447432112769';
+const KEY = 'ginas-visa-assessment-v1';
+
+// ---- Questionnaire definition ------------------------------------------------
+const yesno = ['Yes','No'];
+const STEPS = [
+ {id:'about', title:'About you', no:'Step 1 of 7', img:'assets/passport.jpg', text:'The basics the embassy will ask for first.', fields:[
+  {id:'fullName',label:'Full name (as on passport)',type:'text',req:true,half:true},
+  {id:'dob',label:'Date of birth',type:'date',req:true,half:true},
+  {id:'nationality',label:'Nationality (passport country)',type:'text',req:true,half:true},
+  {id:'secondNationality',label:'Second nationality / passport',type:'text',half:true,hint:'Leave blank if none'},
+  {id:'residence',label:'Country you live in now',type:'text',req:true,half:true},
+  {id:'residenceStatus',label:'Your status in that country',type:'select',req:true,half:true,options:['Citizen','Permanent resident / ILR','Work or study visa holder','Visitor / temporary','Asylum / other']},
+  {id:'marital',label:'Marital status',type:'choices',req:true,options:['Single','Married','Divorced','Separated','Widowed']},
+  {id:'email',label:'Email address',type:'email',req:true,half:true},
+  {id:'phone',label:'Phone / WhatsApp',type:'tel',req:true,half:true},
+ ]},
+ {id:'trip', title:'Your trip', no:'Step 2 of 7', img:'assets/hero.jpg', text:'Where you want to go, why, and who is paying.', fields:[
+  {id:'visaType',label:'Which visa do you need?',type:'select',req:true,options:['UK Standard Visitor','UK Family / Settlement','Schengen (Europe)','USA (B1/B2 visitor)','USA (other)','Canada (visitor / TRV)','UAE (Dubai)','Türkiye','Nigeria','Ghana','Other / not sure']},
+  {id:'visaOther',label:'Tell us the country / visa',type:'text',showIf:{visaType:['Other / not sure','USA (other)']}},
+  {id:'purpose',label:'Main purpose of the trip',type:'choices',req:true,options:['Tourism / holiday','Visiting family','Visiting friends','Business / meetings','Conference / event','Short course / study','Medical treatment','Wedding / ceremony','Other']},
+  {id:'purposeDetail',label:'Describe the purpose in your own words',type:'textarea',req:true,hint:'E.g. “Visiting my sister in Manchester for two weeks over Christmas.”'},
+  {id:'travelDate',label:'Intended travel date',type:'date',req:true,half:true},
+  {id:'duration',label:'How long will you stay? (days)',type:'number',req:true,half:true},
+  {id:'payer',label:'Who is paying for the trip?',type:'choices',req:true,options:['Myself','Spouse / partner','Family member','Friend / host','Employer','Sponsor organisation']},
+  {id:'sponsorDetail',label:'Sponsor’s name, relationship, where they live and their status there',type:'textarea',req:true,showIf:{payer:['Spouse / partner','Family member','Friend / host','Employer','Sponsor organisation']}},
+  {id:'accommodation',label:'Where will you stay?',type:'select',req:true,half:true,options:['Hotel','With family','With friends','Own property','Employer-arranged','Not decided yet']},
+  {id:'companions',label:'Travelling with anyone?',type:'select',req:true,half:true,options:['Alone','With spouse / partner','With children','With spouse and children','With friends / group','With colleagues']},
+  {id:'bookedAlready',label:'Have you already booked flights or accommodation?',type:'choices',req:true,options:['Nothing yet','Flights only','Accommodation only','Both']},
+ ]},
+ {id:'family', title:'Family & ties', no:'Step 3 of 7', img:'assets/consultant.jpg', text:'Embassies look for strong reasons to return home. Family is a big one.', fields:[
+  {id:'spouseName',label:'Spouse / partner’s full name',type:'text',half:true,showIf:{marital:['Married','Separated']}},
+  {id:'spouseNationality',label:'Spouse’s nationality & where they live',type:'text',half:true,showIf:{marital:['Married','Separated']}},
+  {id:'spouseTravelling',label:'Is your spouse travelling with you?',type:'choices',options:yesno,showIf:{marital:['Married']}},
+  {id:'childrenCount',label:'How many children do you have?',type:'select',req:true,half:true,options:['None','1','2','3','4','5 or more']},
+  {id:'childrenAges',label:'Children’s ages',type:'text',half:true,showIf:{childrenCount:['1','2','3','4','5 or more']},hint:'E.g. 4, 9 and 14'},
+  {id:'childrenTravelling',label:'Are any children travelling with you?',type:'choices',options:['Yes, all','Some of them','No'],showIf:{childrenCount:['1','2','3','4','5 or more']}},
+  {id:'dependants',label:'Anyone else who depends on you financially? (parents, relatives)',type:'text',hint:'Leave blank if none'},
+  {id:'familyAbroad',label:'Do you have family in the country you are visiting?',type:'choices',req:true,options:yesno},
+  {id:'familyAbroadDetail',label:'Who are they, and what is their immigration status there?',type:'textarea',req:true,showIf:{familyAbroad:['Yes']},hint:'E.g. “Sister, British citizen, lives in Leeds.”'},
+  {id:'ties',label:'What will bring you back home after the trip?',type:'textarea',req:true,hint:'Job, business, property, studies, children at school, caring for parents… Be specific.'},
+ ]},
+ {id:'work', title:'Work & finances', no:'Step 4 of 7', img:'assets/visa-finances.jpg', text:'Most refusals are about money and proof of it. Honest numbers help us help you.', fields:[
+  {id:'employment',label:'Employment status',type:'choices',req:true,options:['Employed','Self-employed','Business owner','Student','Retired','Homemaker','Unemployed']},
+  {id:'employer',label:'Employer / business name',type:'text',half:true,req:true,showIf:{employment:['Employed','Self-employed','Business owner']}},
+  {id:'jobTitle',label:'Job title / what the business does',type:'text',half:true,req:true,showIf:{employment:['Employed','Self-employed','Business owner']}},
+  {id:'employedSince',label:'Since when? (month/year)',type:'text',half:true,showIf:{employment:['Employed','Self-employed','Business owner']}},
+  {id:'leaveApproved',label:'Has your employer approved leave for the trip?',type:'choices',options:['Yes','Not yet','Not asked'],showIf:{employment:['Employed']}},
+  {id:'institution',label:'School / university and course',type:'text',req:true,showIf:{employment:['Student']}},
+  {id:'incomeBand',label:'Monthly income (after tax)',type:'select',req:true,half:true,options:['Under £500','£500 – £1,000','£1,000 – £2,000','£2,000 – £3,500','£3,500 – £5,000','Over £5,000','No regular income']},
+  {id:'currency',label:'Currency of your income / savings',type:'select',req:true,half:true,options:['GBP £','NGN ₦','USD $','EUR €','GHS ₵','AED','Other']},
+  {id:'savings',label:'Amount saved for this trip',type:'text',req:true,half:true,hint:'Approximate figure in the currency above'},
+  {id:'savingsAge',label:'How long has that money been in your account?',type:'select',req:true,half:true,options:['Less than 1 month','1 – 3 months','3 – 6 months','More than 6 months']},
+  {id:'bankStatements',label:'Can you provide 6 months of bank statements?',type:'choices',req:true,options:['Yes','Only 3 months','No']},
+  {id:'otherAssets',label:'Other income or assets (property, rent, investments, pension)',type:'textarea',hint:'Leave blank if none'},
+  {id:'taxDocs',label:'Do you have tax returns / business registration documents?',type:'choices',options:['Yes','Some','No'],showIf:{employment:['Self-employed','Business owner']}},
+ ]},
+ {id:'history', title:'Travel history', no:'Step 5 of 7', img:'assets/visa-stamps.jpg', text:'Previous travel, and anything that went wrong, matters more than people think.', fields:[
+  {id:'countriesVisited',label:'Countries visited in the last 10 years',type:'textarea',req:true,hint:'List them with the year if you can. Write “None” if you have not travelled.'},
+  {id:'visitedBefore',label:'Have you visited any of these before?',type:'multi',options:['UK','Schengen / Europe','USA','Canada','Australia / NZ','UAE','None of these']},
+  {id:'overstayed',label:'Have you ever overstayed a visa or breached its conditions?',type:'choices',req:true,options:yesno},
+  {id:'overstayDetail',label:'Please explain (country, year, how long)',type:'textarea',req:true,showIf:{overstayed:['Yes']}},
+  {id:'refused',label:'Have you ever been refused a visa?',type:'choices',req:true,options:yesno},
+  {id:'refusedDetail',label:'Which country, which year, and the reason given',type:'textarea',req:true,showIf:{refused:['Yes']},hint:'Copy the reason from the refusal letter if you have it.'},
+  {id:'removed',label:'Ever been deported, removed, or banned from entering a country?',type:'choices',req:true,options:yesno},
+  {id:'removedDetail',label:'Please give details',type:'textarea',req:true,showIf:{removed:['Yes']}},
+  {id:'convictions',label:'Any criminal convictions, cautions or pending charges (any country)?',type:'choices',req:true,options:yesno},
+  {id:'convictionsDetail',label:'Please give details',type:'textarea',req:true,showIf:{convictions:['Yes']}},
+  {id:'pendingApps',label:'Any visa application currently pending anywhere?',type:'choices',req:true,options:yesno},
+ ]},
+ {id:'docs', title:'Passport & documents', no:'Step 6 of 7', img:'assets/visa-documents.jpg', text:'Tell us what you already have. We will tell you what is missing.', fields:[
+  {id:'passportExpiry',label:'Passport expiry date',type:'date',req:true,half:true},
+  {id:'passportPages',label:'At least 2 blank pages?',type:'select',req:true,half:true,options:['Yes','No','Not sure']},
+  {id:'oldPassports',label:'Do you still have your previous passports?',type:'choices',req:true,options:['Yes','Some','No','Never had one']},
+  {id:'documents',label:'Documents you already have',type:'multi',options:['Bank statements (6 months)','Payslips','Employment letter','Business registration','Tax returns','Invitation letter from host','Host’s passport / status proof','Flight itinerary','Accommodation booking','Property documents','Marriage certificate','Children’s birth certificates','Travel insurance','Previous visas']},
+  {id:'urgency',label:'When do you need the visa by?',type:'select',req:true,half:true,options:['Within 2 weeks','2 – 4 weeks','1 – 2 months','2 – 3 months','More than 3 months']},
+  {id:'usedAgent',label:'Used a visa agent before?',type:'select',req:true,half:true,options:['No','Yes, successfully','Yes, but it was refused']},
+ ]},
+ {id:'contact', title:'How to reach you', no:'Step 7 of 7', img:'assets/visa-consultant-call.jpg', text:'Last step. Then review everything before you send it.', fields:[
+  {id:'contactPref',label:'How should we contact you?',type:'choices',req:true,options:['WhatsApp','Phone call','Email']},
+  {id:'contactTime',label:'Best time to reach you',type:'select',half:true,options:['Morning (9–12)','Afternoon (12–5)','Evening (5–8)','Any time']},
+  {id:'heardFrom',label:'How did you hear about us?',type:'select',half:true,options:['Instagram','Friend / family','Google','Flyer','Existing client','Other']},
+  {id:'extra',label:'Anything else we should know?',type:'textarea',hint:'Health conditions, previous names, special circumstances, questions.'},
+ ]},
+];
+
+// ---- State ------------------------------------------------------------------
+let state = {}; let step = -1; let onReview = false;
+try{ const s = JSON.parse(localStorage.getItem(KEY)||'null'); if(s && s.state){ state = s.state; } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify({state, step})); }catch(e){} }
+
+const $ = s => document.querySelector(s);
+const wiz = $('#wiz'), intro = $('#intro'), fieldsEl = $('#fields'), bar = $('#bar'), prog = $('#prog');
+const nextBtn = $('#next'), backBtn = $('#back');
+
+function visible(f){ if(!f.showIf) return true; return Object.entries(f.showIf).every(([k,vals])=>{ const v = state[k]; return Array.isArray(v) ? v.some(x=>vals.includes(x)) : vals.includes(v); }); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function renderStep(i){
+  onReview = false; step = i; const S = STEPS[i];
+  $('#sideImg').src = S.img; $('#sideNo').textContent = S.no; $('#sideTitle').textContent = S.title; $('#sideText').textContent = S.text;
+  bar.style.width = ((i)/(STEPS.length))*100 + '%'; prog.textContent = (i+1) + ' / ' + STEPS.length;
+  let html = ''; let pendingHalf = null;
+  const flush = ()=>{ if(pendingHalf){ html += `<div class="row">${pendingHalf}</div>`; pendingHalf = null; } };
+  S.fields.forEach(f=>{
+    const block = fieldHTML(f);
+    if(f.half){ if(pendingHalf){ html += `<div class="row">${pendingHalf}${block}</div>`; pendingHalf = null; } else pendingHalf = block; }
+    else { flush(); html += block; }
+  }); flush();
+  fieldsEl.innerHTML = html; fieldsEl.classList.remove('fields'); void fieldsEl.offsetWidth; fieldsEl.classList.add('fields');
+  bindFields(S); applyVisibility();
+  backBtn.textContent = i===0 ? '← Start over' : '← Back';
+  nextBtn.innerHTML = i===STEPS.length-1 ? 'Review my answers →' : 'Continue →';
+  nextBtn.disabled = false;
+  wiz.scrollIntoView({behavior:'smooth',block:'start'}); save();
+}
+
+function fieldHTML(f){
+  const v = state[f.id]; const req = f.req ? ' <span class="req">*</span>' : '';
+  const lab = `<label for="f-${f.id}">${esc(f.label)}${req}</label>` + (f.hint?`<div class="hint">${esc(f.hint)}</div>`:'');
+  let ctl = '';
+  if(f.type==='select'){ ctl = `<select id="f-${f.id}" data-id="${f.id}"><option value="">Select…</option>${f.options.map(o=>`<option${v===o?' selected':''}>${esc(o)}</option>`).join('')}</select>`; }
+  else if(f.type==='textarea'){ ctl = `<textarea id="f-${f.id}" data-id="${f.id}">${esc(v)}</textarea>`; }
+  else if(f.type==='choices'){ ctl = `<div class="choices${f.options.length>4?'':' '}" id="f-${f.id}" role="group">${f.options.map(o=>`<button type="button" class="choice" data-id="${f.id}" data-val="${esc(o)}" aria-pressed="${v===o}">${esc(o)}</button>`).join('')}</div>`; }
+  else if(f.type==='multi'){ const arr = Array.isArray(v)?v:[]; ctl = `<div class="choices" id="f-${f.id}" role="group">${f.options.map(o=>`<button type="button" class="choice" data-id="${f.id}" data-multi="1" data-val="${esc(o)}" aria-pressed="${arr.includes(o)}">${esc(o)}</button>`).join('')}</div>`; }
+  else { ctl = `<input id="f-${f.id}" data-id="${f.id}" type="${f.type}" value="${esc(v)}"${f.type==='number'?' min="1" max="365"':''}>`; }
+  return `<div class="field${visible(f)?'':' hidden'}" data-field="${f.id}">${lab}${ctl}<div class="msg">This one is required.</div></div>`;
+}
+
+function bindFields(S){
+  fieldsEl.querySelectorAll('input,select,textarea').forEach(el=>{
+    el.addEventListener('input', ()=>{ state[el.dataset.id] = el.value; el.closest('.field').classList.remove('err'); applyVisibility(); save(); });
+  });
+  fieldsEl.querySelectorAll('.choice').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const id = b.dataset.id, val = b.dataset.val;
+      if(b.dataset.multi){
+        let arr = Array.isArray(state[id]) ? [...state[id]] : [];
+        if(val.startsWith('None')) arr = arr.includes(val) ? [] : [val];
+        else { arr = arr.filter(x=>!x.startsWith('None')); arr = arr.includes(val) ? arr.filter(x=>x!==val) : [...arr,val]; }
+        state[id] = arr;
+        b.parentElement.querySelectorAll('.choice').forEach(c=>c.setAttribute('aria-pressed', arr.includes(c.dataset.val)));
+      } else {
+        state[id] = val; b.parentElement.querySelectorAll('.choice').forEach(c=>c.setAttribute('aria-pressed', c===b));
+      }
+      b.closest('.field').classList.remove('err'); applyVisibility(); save();
+    });
+  });
+}
+function applyVisibility(){ const S = STEPS[step]; if(!S) return; S.fields.forEach(f=>{ const el = fieldsEl.querySelector(`[data-field="${f.id}"]`); if(el) el.classList.toggle('hidden', !visible(f)); }); }
+
+function validate(){
+  const S = STEPS[step]; let first = null;
+  S.fields.forEach(f=>{
+    if(!visible(f) || !f.req) return;
+    const v = state[f.id]; const empty = v==null || (Array.isArray(v) ? v.length===0 : String(v).trim()==='');
+    const bad = empty || (f.type==='email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v));
+    const el = fieldsEl.querySelector(`[data-field="${f.id}"]`);
+    el.classList.toggle('err', bad); if(bad && !first) first = el;
+  });
+  if(first){ first.scrollIntoView({behavior:'smooth',block:'center'}); return false; }
+  return true;
+}
+
+// ---- Review & send ------------------------------------------------------------
+function answers(){ // [{section, items:[[label,value]]}]
+  return STEPS.map(S=>({section:S.title, idx:STEPS.indexOf(S), items:S.fields.filter(visible).map(f=>{ const v = state[f.id]; const txt = Array.isArray(v)?v.join(', '):(v||''); return [f.label, txt]; }).filter(([,v])=>v.trim()!=='')}));
+}
+function summaryText(){
+  const lines = ['VISA PRE-ASSESSMENT — Gina’s Travel Agency', 'Submitted: ' + new Date().toLocaleString('en-GB',{dateStyle:'long',timeStyle:'short'}), ''];
+  answers().forEach(s=>{ lines.push('## ' + s.section); s.items.forEach(([l,v])=>lines.push(l + ': ' + v)); lines.push(''); });
+  lines.push('## Quick flags'); flags().forEach(f=>lines.push('- ' + f));
+  return lines.join('\n');
+}
+function flags(){
+  const f = []; const s = state;
+  if(s.refused==='Yes') f.push('Previous visa refusal: ' + (s.refusedDetail||'details not given'));
+  if(s.overstayed==='Yes') f.push('Previous overstay / breach: ' + (s.overstayDetail||''));
+  if(s.removed==='Yes') f.push('Previous removal or ban: ' + (s.removedDetail||''));
+  if(s.convictions==='Yes') f.push('Criminal history declared: ' + (s.convictionsDetail||''));
+  if(s.savingsAge==='Less than 1 month' || s.savingsAge==='1 – 3 months') f.push('Savings held for a short time (' + s.savingsAge + ') — large recent deposits will need explaining');
+  if(s.bankStatements!=='Yes') f.push('Full 6-month bank statements not available');
+  if(s.employment==='Unemployed' || s.incomeBand==='No regular income') f.push('No regular income — sponsor evidence will be essential');
+  if(s.payer && s.payer!=='Myself') f.push('Trip funded by ' + s.payer + ' — sponsor documents required');
+  if(s.countriesVisited && /^\s*none/i.test(s.countriesVisited)) f.push('No previous international travel');
+  if(s.urgency==='Within 2 weeks') f.push('Urgent timeline: needed within 2 weeks');
+  if(s.passportExpiry){ const d = new Date(s.passportExpiry), t = new Date(); const months = (d - t)/(1000*60*60*24*30.4); if(months < 6) f.push('Passport expires within 6 months (' + s.passportExpiry + ')'); }
+  if(s.passportPages==='No') f.push('Passport has fewer than 2 blank pages');
+  if(!f.length) f.push('No obvious red flags from the answers given');
+  return f;
+}
+function readiness(){ // rough traffic-light for the client only
+  const s = state; let score = 0;
+  if(s.refused==='Yes') score += 2; if(s.overstayed==='Yes') score += 3; if(s.removed==='Yes') score += 3; if(s.convictions==='Yes') score += 2;
+  if(s.savingsAge==='Less than 1 month') score += 2; if(s.bankStatements==='No') score += 2; if(s.employment==='Unemployed') score += 1;
+  if(s.countriesVisited && /^\s*none/i.test(s.countriesVisited)) score += 1;
+  return score===0 ? ['g','Looks straightforward — we will confirm the document list'] : score<=3 ? ['a','Workable — a few things need careful preparation'] : ['r','Challenging — we will be honest about your options'];
+}
+
+function renderReview(){
+  onReview = true; bar.style.width = '100%'; prog.textContent = 'Review';
+  $('#sideImg').src = 'assets/visa-consultant-call.jpg'; $('#sideNo').textContent = 'Final check'; $('#sideTitle').textContent = 'Review your answers'; $('#sideText').textContent = 'Tap “Edit” on any section to change it. Then send it to our consultants.';
+  const blocks = answers().map(s=>`<div class="rv-block"><h3>${esc(s.section)}<button type="button" data-goto="${s.idx}">Edit</button></h3><dl>${s.items.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div>`).join('');
+  fieldsEl.innerHTML = `<div class="review">${blocks}<label class="consent"><input type="checkbox" id="consent"><span>I confirm the information above is true and complete, and I agree to Gina’s Travel Agency using it to assess my visa options and contact me. I understand this is a pre-assessment, not a guarantee of a visa.</span></label></div>`;
+  fieldsEl.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>renderStep(+b.dataset.goto)));
+  backBtn.textContent = '← Back'; nextBtn.innerHTML = 'Send my assessment'; nextBtn.disabled = false;
+  wiz.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function send(){
+  const c = $('#consent'); if(!c.checked){ c.focus(); c.parentElement.style.color = 'var(--red)'; return; }
+  nextBtn.disabled = true; nextBtn.textContent = 'Sending…';
+  const text = summaryText(); const s = state;
+  const payload = { _subject: 'VISA ASSESSMENT: ' + (s.visaType||'') + ' — ' + (s.fullName||''), Name: s.fullName, Email: s.email, Phone: s.phone, Visa: s.visaType, Purpose: s.purpose, TravelDate: s.travelDate, Summary: text };
+  const done = (sent)=>{
+    const [cls,msg] = readiness();
+    fieldsEl.innerHTML = `<div class="done"><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><h2>${sent?'Assessment sent':'Nearly there'}</h2><p class="lead" style="text-align:center">${sent?'Thank you, '+esc((s.fullName||'').split(' ')[0])+'. A consultant will review this and contact you by '+esc(s.contactPref||'WhatsApp')+' within one working day.':'Our email relay is busy. Please copy the summary below and send it to us on WhatsApp or to info@ginastravel.co.uk.'}</p><span class="score ${cls}">${msg}</span><div class="summary-box" id="sum">${esc(text)}</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button class="btn btn-ghost" type="button" id="copy">Copy summary</button><a class="btn btn-blue" target="_blank" rel="noopener" href="${WA}?text=${encodeURIComponent('Hello Gina’s Travel, I have completed the visa pre-assessment. Name: ' + (s.fullName||''))}">Message us on WhatsApp</a></div><p class="note">Keep a copy for your records.</p></div>`;
+    $('#copy').addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(text); $('#copy').textContent = 'Copied'; }catch(e){ const r = document.createRange(); r.selectNodeContents($('#sum')); getSelection().removeAllRanges(); getSelection().addRange(r); } });
+    document.querySelector('.actions').style.display = 'none'; bar.style.width = '100%'; prog.textContent = 'Done';
+    if(sent){ try{ localStorage.removeItem(KEY); }catch(e){} }
+    wiz.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+    .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(()=>done(true)).catch(()=>done(false));
+}
+
+// ---- Navigation -----------------------------------------------------------------
+$('#start').addEventListener('click', ()=>{ intro.style.display='none'; wiz.classList.add('on'); renderStep(0); });
+nextBtn.addEventListener('click', ()=>{ if(onReview) return send(); if(!validate()) return; if(step < STEPS.length-1) renderStep(step+1); else renderReview(); });
+backBtn.addEventListener('click', ()=>{ if(onReview) return renderStep(STEPS.length-1); if(step>0) renderStep(step-1); else { if(confirm('Start over and clear your answers?')){ state = {}; save(); renderStep(0); } } });
+// Resume a saved draft
+try{ const saved = JSON.parse(localStorage.getItem(KEY)||'null'); if(saved && saved.state && Object.keys(saved.state).length){ const b = $('#start'); b.textContent = 'Continue where I left off →'; const r = document.createElement('button'); r.className='btn btn-ghost'; r.type='button'; r.textContent='Start fresh'; r.addEventListener('click',()=>{ state={}; save(); intro.style.display='none'; wiz.classList.add('on'); renderStep(0); }); b.after(r); b.addEventListener('click',()=>{ renderStep(Math.min(saved.step||0, STEPS.length-1)); }, {once:true}); } }catch(e){}
+})();
+</script>
+</body>
+</html>

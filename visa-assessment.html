@@ -47,7 +47,7 @@ button{font:inherit}
 /* stage & screens */
 .stage{position:relative;z-index:2;height:100%;display:grid;place-items:center;padding:90px clamp(16px,5vw,60px) 100px;overflow-y:auto}
 @media(max-width:600px){.q{font-size:30px}.in{font-size:22px;padding:14px 12px}.choice{font-size:18px;padding:16px 18px}.ok{font-size:19px;padding:17px 32px}}
-.screen{position:absolute;width:min(900px,100%);left:50%;transform:translateX(-50%);display:grid;gap:22px;will-change:transform,opacity}
+.screen{position:absolute;width:min(900px,calc(100% - 2*clamp(16px,5vw,60px)));left:50%;transform:translateX(-50%);display:grid;gap:22px;will-change:transform,opacity}
 .screen.enter{animation:in .6s var(--ease) both}
 .screen.exit{animation:out .45s var(--ease) both;pointer-events:none}
 .screen.enter.back{animation-name:inBack}

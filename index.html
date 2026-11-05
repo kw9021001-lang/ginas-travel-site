@@ -577,8 +577,8 @@ footer a:hover{color:var(--orange)}
   const BREVO_VISA_FORM = 'https://84733c9d.sibforms.com/serve/MUIFAEpXIw6lmVzWN_8b2qfEpAfN426ouEZKURQa5POow9AkwFAoyZvz_REwzzs7EjRmbsct2_cVIE54WaGxAEj6UwH1GRsXkeRMYUcwGH86n1mAZCCaltKhFPhFp_GEygl96KggqdZTogKq9sHahj0qXhyifQCojL76s8o1PL_a-z6YVAJ5bSlprtJfy4w1iDxz6I0LLXycBYaKcw==';
   function addToVisaFollowUp(email, fullName){
     try{
-      const fd = new FormData(); fd.append('EMAIL', email); fd.append('FIRSTNAME', (fullName||'').trim().split(/\s+/)[0] || ''); fd.append('email_address_check', ''); fd.append('locale', 'en');
-      return fetch(BREVO_VISA_FORM, {method:'POST', body: fd, mode:'no-cors', keepalive:true}).catch(()=>{});
+      const body = new URLSearchParams({EMAIL: email, FIRSTNAME: (fullName||'').trim().split(/\s+/)[0] || '', email_address_check: '', locale: 'en'});
+      return fetch(BREVO_VISA_FORM + '?isAjax=1', {method:'POST', body, headers:{'Content-Type':'application/x-www-form-urlencoded'}, mode:'no-cors', keepalive:true}).catch(()=>{});
     }catch(e){ return Promise.resolve(); }
   }
   document.documentElement.classList.add('js');

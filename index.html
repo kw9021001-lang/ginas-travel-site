@@ -578,7 +578,7 @@ footer a:hover{color:var(--orange)}
   function addToVisaFollowUp(email, fullName){
     try{
       const body = new URLSearchParams({EMAIL: email, FIRSTNAME: (fullName||'').trim().split(/\s+/)[0] || '', email_address_check: '', locale: 'en'});
-      return fetch(BREVO_VISA_FORM + '?isAjax=1', {method:'POST', body, headers:{'Content-Type':'application/x-www-form-urlencoded'}, mode:'no-cors', keepalive:true}).catch(()=>{});
+      return fetch(BREVO_VISA_FORM + '?isAjax=1', {method:'POST', body, headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(()=>{});
     }catch(e){ return Promise.resolve(); }
   }
   document.documentElement.classList.add('js');

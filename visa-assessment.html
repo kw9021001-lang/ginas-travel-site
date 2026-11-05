@@ -139,6 +139,20 @@ textarea.in{min-height:110px;resize:none;font-size:17px;line-height:1.5}
 .ok.ghost::before,.ok.ghost::after{display:none}
 .ok.ghost:hover{background:var(--paper)}
 .kbd{font-size:13px;color:var(--ink-3)}
+.btns{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;width:100%}
+.backbtn{min-width:0;padding:17px 22px;gap:8px}
+.backbtn svg{width:16px;height:16px}
+select.in{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2C96' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:16px;padding-right:40px}
+.combo{display:grid;grid-template-columns:1fr minmax(128px,42%);gap:10px}
+.phone{display:grid;grid-template-columns:auto 1fr;gap:10px}
+.code{position:relative;display:flex;align-items:center;gap:8px;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:0 34px 0 14px;font-size:18px;white-space:nowrap;min-width:118px;transition:border-color .2s,box-shadow .2s,background .2s}
+.code::after{content:"";position:absolute;right:12px;top:50%;width:14px;height:14px;transform:translateY(-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2C96' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat}
+.code b{font-weight:500}
+.code select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px}
+.code:focus-within{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(30,44,150,.12)}
+.money{position:relative}
+.money .cur{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:18px;font-weight:500;color:var(--ink-2);pointer-events:none}
+.money .in{padding-left:var(--curw,52px)}
 .kbd b{font-weight:600;color:var(--ink-2)}
 
 /* section intro */
@@ -174,7 +188,7 @@ textarea.in{min-height:110px;resize:none;font-size:17px;line-height:1.5}
 .score.g{background:#E6F6EC;color:#1E7A3A}.score.a{background:var(--orange-soft);color:var(--orange-deep)}.score.r{background:#FDE8E8;color:#B33A3A}
 .sumbox{width:100%;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;white-space:pre-wrap;max-height:200px;overflow:auto;color:var(--ink-2)}
 .confetti{position:fixed;inset:0;z-index:4;pointer-events:none}
-@media(max-width:600px){.card{padding:22px 18px;gap:18px;border-radius:22px}.photo{width:calc(100% + 36px);margin:-22px -18px 0;border-radius:22px 22px 0 0}.ok{width:100%}.kbd{display:none}.q{font-size:23px}}
+@media(max-width:600px){.card{padding:22px 18px;gap:18px;border-radius:22px}.photo{width:calc(100% + 36px);margin:-22px -18px 0;border-radius:22px 22px 0 0}.ok{width:100%}.btns .ok{width:auto;flex:1}.btns .backbtn{flex:0 0 auto}.kbd{display:none}.q{font-size:23px}.phone{grid-template-columns:auto 1fr}.code{min-width:0}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="5b4959e6-32c2-4901-9919-88007c4ef5a2"></script>
@@ -189,9 +203,26 @@ textarea.in{min-height:110px;resize:none;font-size:17px;line-height:1.5}
 (function(){
 const FORM_ENDPOINT = 'https://formspree.io/f/mrppallj';
 const WA = 'https://wa.me/447432112769';
-const KEY = 'ginas-visa-assessment-v3';
+const KEY = 'ginas-visa-assessment-v4';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const yesno = ['Yes','No'];
+const DIAL = [['GB','United Kingdom','+44','🇬🇧'],['NG','Nigeria','+234','🇳🇬'],['GH','Ghana','+233','🇬🇭'],['US','United States','+1','🇺🇸'],['CA','Canada','+1','🇨🇦'],['IE','Ireland','+353','🇮🇪'],['AE','United Arab Emirates','+971','🇦🇪'],['ZA','South Africa','+27','🇿🇦'],['KE','Kenya','+254','🇰🇪'],['UG','Uganda','+256','🇺🇬'],['TZ','Tanzania','+255','🇹🇿'],['ZW','Zimbabwe','+263','🇿🇼'],['ZM','Zambia','+260','🇿🇲'],['CM','Cameroon','+237','🇨🇲'],['CI','Côte d’Ivoire','+225','🇨🇮'],['SN','Senegal','+221','🇸🇳'],['SL','Sierra Leone','+232','🇸🇱'],['GM','Gambia','+220','🇬🇲'],['LR','Liberia','+231','🇱🇷'],['EG','Egypt','+20','🇪🇬'],['MA','Morocco','+212','🇲🇦'],['ET','Ethiopia','+251','🇪🇹'],['RW','Rwanda','+250','🇷🇼'],['FR','France','+33','🇫🇷'],['DE','Germany','+49','🇩🇪'],['ES','Spain','+34','🇪🇸'],['IT','Italy','+39','🇮🇹'],['NL','Netherlands','+31','🇳🇱'],['BE','Belgium','+32','🇧🇪'],['PT','Portugal','+351','🇵🇹'],['SE','Sweden','+46','🇸🇪'],['NO','Norway','+47','🇳🇴'],['DK','Denmark','+45','🇩🇰'],['CH','Switzerland','+41','🇨🇭'],['AT','Austria','+43','🇦🇹'],['PL','Poland','+48','🇵🇱'],['GR','Greece','+30','🇬🇷'],['TR','Türkiye','+90','🇹🇷'],['SA','Saudi Arabia','+966','🇸🇦'],['QA','Qatar','+974','🇶🇦'],['IN','India','+91','🇮🇳'],['PK','Pakistan','+92','🇵🇰'],['BD','Bangladesh','+880','🇧🇩'],['LK','Sri Lanka','+94','🇱🇰'],['PH','Philippines','+63','🇵🇭'],['CN','China','+86','🇨🇳'],['AU','Australia','+61','🇦🇺'],['NZ','New Zealand','+64','🇳🇿'],['JM','Jamaica','+1876','🇯🇲'],['TT','Trinidad & Tobago','+1868','🇹🇹'],['BR','Brazil','+55','🇧🇷'],['MX','Mexico','+52','🇲🇽']];
+function guessDial(country){
+  const c = String(country||'').toLowerCase().trim(); if(!c) return 'GB';
+  if(/united kingdom|\buk\b|england|scotland|wales|london|britain/.test(c)) return 'GB';
+  if(/united states|\busa?\b|america/.test(c)) return 'US';
+  if(/uae|emirates|dubai|abu dhabi/.test(c)) return 'AE';
+  if(/ivory|ivoire/.test(c)) return 'CI';
+  if(/turkey|türkiye|turkiye/.test(c)) return 'TR';
+  const hit = DIAL.find(d=>{ const name = d[1].toLowerCase(), first = name.split(' ')[0]; return c.includes(name) || (first.length>=5 && c.includes(first)); });
+  return hit ? hit[0] : 'GB';
+}
+const dialOf = iso => (DIAL.find(d=>d[0]===iso)||DIAL[0]);
+function curSym(cur){ const m = String(cur||'').trim(); if(!m||m==='Other') return ''; const parts = m.split(' '); return parts[1] || parts[0]; }
+function fmtMoney(v){ const d = String(v||'').replace(/[^0-9]/g,'').replace(/^0+(?=\d)/,'').slice(0,12); return d ? Number(d).toLocaleString('en-GB') : ''; }
+function fmtDate(v){ const d = String(v||'').replace(/[^0-9]/g,'').slice(0,8); let o = d.slice(0,2); if(d.length>2) o += '/' + d.slice(2,4); if(d.length>4) o += '/' + d.slice(4,8); return o; }
+function parseDMY(v){ const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(String(v||'').trim()); if(!m) return null; const d = new Date(+m[3], +m[2]-1, +m[1]); return (d.getFullYear()===+m[3] && d.getMonth()===+m[2]-1 && d.getDate()===+m[1]) ? d : null; }
+function fullPhone(st){ return st.phoneNumber ? dialOf(st.phoneCode||'GB')[2] + ' ' + String(st.phoneNumber).trim() : ''; }
 const INCOME_BANDS = {
   'GBP £':['Under £500','£500 – £1,000','£1,000 – £2,000','£2,000 – £3,500','£3,500 – £5,000','Over £5,000','No regular income'],
   'USD $':['Under $600','$600 – $1,200','$1,200 – $2,500','$2,500 – $4,500','$4,500 – $6,500','Over $6,500','No regular income'],
@@ -216,22 +247,22 @@ function guessCurrency(country){
 const STEPS = [
  {id:'about', title:'About you', no:'Step 1 of 7', img:'assets/passport.jpg', text:'The basics the embassy will ask for first.', fields:[
   {id:'fullName',label:'Full name (as on passport)',type:'text',req:true,half:true},
-  {id:'dob',label:'Date of birth',type:'date',req:true,half:true},
+  {id:'dob',label:'Date of birth',type:'dateText',req:true,half:true},
   {id:'nationality',label:'Nationality (passport country)',type:'text',req:true,half:true},
   {id:'secondNationality',label:'Second nationality / passport',type:'text',half:true,hint:'Leave blank if none'},
   {id:'residence',label:'Country you live in now',type:'text',req:true,half:true},
   {id:'residenceStatus',label:'Your status in that country',type:'select',req:true,half:true,options:['Citizen','Permanent resident / ILR','Work or study visa holder','Visitor / temporary','Asylum / other']},
   {id:'marital',label:'Marital status',type:'choices',req:true,options:['Single','Married','Divorced','Separated','Widowed']},
   {id:'email',label:'Email address',type:'email',req:true,half:true},
-  {id:'phone',label:'Phone / WhatsApp',type:'tel',req:true,half:true},
+  {id:'phone',label:'Phone / WhatsApp',type:'phone',req:true,half:true},
  ]},
  {id:'trip', title:'Your trip', no:'Step 2 of 7', img:'assets/hero.jpg', text:'Where you want to go, why, and who is paying.', fields:[
   {id:'visaType',label:'Which visa do you need?',type:'select',req:true,options:['UK Standard Visitor','UK Family / Settlement','Schengen (Europe)','USA (B1/B2 visitor)','USA (other)','Canada (visitor / TRV)','UAE (Dubai)','Türkiye','Nigeria','Ghana','Other / not sure']},
   {id:'visaOther',label:'Tell us the country / visa',type:'text',showIf:{visaType:['Other / not sure','USA (other)']}},
   {id:'purpose',label:'Main purpose of the trip',type:'choices',req:true,options:['Tourism / holiday','Visiting family','Visiting friends','Business / meetings','Conference / event','Short course / study','Medical treatment','Wedding / ceremony','Other']},
   {id:'purposeDetail',label:'Describe the purpose in your own words',type:'textarea',req:true,hint:'E.g. “Visiting my sister in Manchester for two weeks over Christmas.”'},
-  {id:'travelDate',label:'Intended travel date',type:'date',req:true,half:true},
-  {id:'duration',label:'How long will you stay? (days)',type:'number',req:true,half:true},
+  {id:'travelDate',label:'Intended travel date',type:'dateText',req:true},
+  {id:'duration',label:'How long will you stay?',type:'numberUnit',units:['Days','Weeks','Months'],req:true,hint:'Type the number, then choose days, weeks or months.'},
   {id:'payer',label:'Who is paying for the trip?',type:'choices',req:true,options:['Myself','Spouse / partner','Family member','Friend / host','Employer','Sponsor organisation']},
   {id:'sponsorDetail',label:'Sponsor’s name, relationship, where they live and their status there',type:'textarea',req:true,showIf:{payer:['Spouse / partner','Family member','Friend / host','Employer','Sponsor organisation']}},
   {id:'accommodation',label:'Where will you stay?',type:'select',req:true,half:true,options:['Hotel','With family','With friends','Own property','Employer-arranged','Not decided yet']},
@@ -259,7 +290,7 @@ const STEPS = [
   {id:'institution',label:'School / university and course',type:'text',req:true,showIf:{employment:['Student']}},
   {id:'currency',label:'Which currency do you earn and save in?',type:'select',req:true,options:['GBP £','NGN ₦','USD $','EUR €','GHS ₵','AED','CAD $','Other'],hint:'We have guessed from the country you live in. Change it if that is wrong.'},
   {id:'incomeBand',label:'Monthly income (after tax)',type:'select',req:true,options:st=>INCOME_BANDS[st.currency]||INCOME_BANDS.Other},
-  {id:'savings',label:st=>'Amount saved for this trip ('+(st.currency||'your currency').replace(/^(\w+).*/,'$1')+')',type:'text',req:true,half:true,hint:'Approximate figure'},
+  {id:'savings',label:st=>'Amount saved for this trip ('+(st.currency||'your currency').replace(/^(\w+).*/,'$1')+')',type:'money',req:true,half:true,hint:'Approximate figure'},
   {id:'savingsAge',label:'How long has that money been in your account?',type:'select',req:true,half:true,options:['Less than 1 month','1 – 3 months','3 – 6 months','More than 6 months']},
   {id:'bankStatements',label:'Can you provide 6 months of bank statements?',type:'choices',req:true,options:['Yes','Only 3 months','No']},
   {id:'otherAssets',label:'Other income or assets (property, rent, investments, pension)',type:'textarea',hint:'Leave blank if none'},
@@ -277,9 +308,12 @@ const STEPS = [
   {id:'convictions',label:'Any criminal convictions, cautions or pending charges (any country)?',type:'choices',req:true,options:yesno},
   {id:'convictionsDetail',label:'Please give details',type:'textarea',req:true,showIf:{convictions:['Yes']}},
   {id:'pendingApps',label:'Any visa application currently pending anywhere?',type:'choices',req:true,options:yesno},
+  {id:'pendingWhere',label:'Which country is it for?',type:'text',req:true,half:true,showIf:{pendingApps:['Yes']}},
+  {id:'pendingType',label:'What kind of visa?',type:'text',req:true,half:true,showIf:{pendingApps:['Yes']},hint:'E.g. visitor, study, work, settlement'},
+  {id:'pendingHowLong',label:'How long has it been pending?',type:'select',req:true,showIf:{pendingApps:['Yes']},options:['Less than 2 weeks','2 – 4 weeks','1 – 3 months','3 – 6 months','More than 6 months']},
  ]},
  {id:'docs', title:'Passport & documents', no:'Step 6 of 7', img:'assets/visa-documents.jpg', text:'Tell us what you already have. We will tell you what is missing.', fields:[
-  {id:'passportExpiry',label:'Passport expiry date',type:'date',req:true,half:true},
+  {id:'passportExpiry',label:'Passport expiry date',type:'dateText',req:true,half:true},
   {id:'passportPages',label:'At least 2 blank pages?',type:'select',req:true,half:true,options:['Yes','No','Not sure']},
   {id:'oldPassports',label:'Do you still have your previous passports?',type:'choices',req:true,options:['Yes','Some','No','Never had one']},
   {id:'documents',label:'Documents you already have',type:'multi',options:['Bank statements (6 months)','Payslips','Employment letter','Business registration','Tax returns','Invitation letter from host','Host’s passport / status proof','Flight itinerary','Accommodation booking','Property documents','Marriage certificate','Children’s birth certificates','Travel insurance','Previous visas']},
@@ -287,13 +321,21 @@ const STEPS = [
   {id:'usedAgent',label:'Used a visa agent before?',type:'select',req:true,half:true,options:['No','Yes, successfully','Yes, but it was refused']},
  ]},
  {id:'contact', title:'How to reach you', no:'Step 7 of 7', img:'assets/visa-consultant-call.jpg', text:'Last step. Then review everything before you send it.', fields:[
-  {id:'contactPref',label:'How should we contact you?',type:'choices',req:true,options:['WhatsApp','Phone call','Email']},
+  {id:'contactPref',label:'How should we contact you?',type:'choices',req:true,options:['WhatsApp','Email']},
   {id:'contactTime',label:'Best time to reach you',type:'select',half:true,options:['Morning (9–12)','Afternoon (12–5)','Evening (5–8)','Any time']},
   {id:'heardFrom',label:'How did you hear about us?',type:'select',half:true,options:['Instagram','Friend / family','Google','Flyer','Existing client','Other']},
   {id:'extra',label:'Anything else we should know?',type:'textarea',hint:'Health conditions, previous names, special circumstances, questions.'},
  ]},
 ];
 
+function emailFields(){ // one numbered row per answer so Formspree's email reads as a tidy table
+  const o = {}; let n = 0;
+  answers().forEach((sec,si)=>{ sec.items.forEach(([l,v])=>{ n++; o[String(n).padStart(2,'0') + '. ' + sec.section + ' — ' + l] = v; }); });
+  o['Readiness (automatic)'] = readiness()[1];
+  flags().forEach((f,i)=>{ o['Flag ' + (i+1)] = f; });
+  o['Submitted'] = new Date().toLocaleString('en-GB',{dateStyle:'long',timeStyle:'short'});
+  return o;
+}
 function summaryText(){
   const lines = ['VISA PRE-ASSESSMENT — Gina’s Travel Agency', 'Submitted: ' + new Date().toLocaleString('en-GB',{dateStyle:'long',timeStyle:'short'}), ''];
   answers().forEach(s=>{ lines.push('## ' + s.section); s.items.forEach(([l,v])=>lines.push(l + ': ' + v)); lines.push(''); });
@@ -312,7 +354,8 @@ function flags(){
   if(s.payer && s.payer!=='Myself') f.push('Trip funded by ' + s.payer + ' — sponsor documents required');
   if(s.countriesVisited && /^\s*none/i.test(s.countriesVisited)) f.push('No previous international travel');
   if(s.urgency==='Within 2 weeks') f.push('Urgent timeline: needed within 2 weeks');
-  if(s.passportExpiry){ const d = new Date(s.passportExpiry), t = new Date(); const months = (d - t)/(1000*60*60*24*30.4); if(months < 6) f.push('Passport expires within 6 months (' + s.passportExpiry + ')'); }
+  if(s.passportExpiry){ const d = parseDMY(s.passportExpiry), t = new Date(); if(d){ const months = (d - t)/(1000*60*60*24*30.4); if(months < 0) f.push('Passport has EXPIRED (' + s.passportExpiry + ')'); else if(months < 6) f.push('Passport expires within 6 months (' + s.passportExpiry + ')'); } }
+  if(s.pendingApps==='Yes') f.push('Visa application currently pending: ' + [s.pendingWhere, s.pendingType, s.pendingHowLong].filter(Boolean).join(', '));
   if(s.passportPages==='No') f.push('Passport has fewer than 2 blank pages');
   if(!f.length) f.push('No obvious red flags from the answers given');
   return f;
@@ -335,7 +378,7 @@ function buildScreens(){
     let i = 0;
     while(i < S.fields.length){
       const f = S.fields[i], n = S.fields[i+1];
-      if(f.half && n && n.half && !n.showIf && !f.showIf){ out.push({type:'q', step:S, si, fields:[f,n]}); i += 2; }
+      if(f.half && n && n.half && JSON.stringify(n.showIf||null)===JSON.stringify(f.showIf||null)){ out.push({type:'q', step:S, si, fields:[f,n]}); i += 2; }
       else { out.push({type:'q', step:S, si, fields:[f]}); i += 1; }
     }
   });
@@ -344,6 +387,7 @@ function buildScreens(){
 }
 const SCREENS = buildScreens();
 const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const BACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>';
 const TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>';
 
 // ---- State --------------------------------------------------------------------
@@ -379,7 +423,7 @@ function html(sc){
   }
   if(sc.type==='section'){
     const S = sc.step;
-    return `<div class="photo"><img src="${S.img}" alt=""><span class="tag">Part ${sc.si+1} of ${STEPS.length}</span></div>${header(sc)}<div class="body"><h2 class="big">${esc(S.title)}</h2><p class="lead">${esc(S.text)}</p><div class="cta"><button class="ok" data-act="next">Continue ${ARROW}</button><span class="kbd">or press <b>Enter ↵</b></span></div></div>`;
+    return `<div class="photo"><img src="${S.img}" alt=""><span class="tag">Part ${sc.si+1} of ${STEPS.length}</span></div>${header(sc)}<div class="body"><h2 class="big">${esc(S.title)}</h2><p class="lead">${esc(S.text)}</p><div class="cta"><div class="btns"><button type="button" class="ok ghost backbtn" data-act="back">${BACK} Back</button><button class="ok" data-act="next">Continue ${ARROW}</button></div><span class="kbd">or press <b>Enter ↵</b></span></div></div>`;
   }
   if(sc.type==='q'){
     const fs = sc.fields.filter(visible); const one = fs.length===1;
@@ -388,21 +432,25 @@ function html(sc){
       let ctl='';
       if(f.type==='textarea') ctl = `<textarea class="in" data-id="${f.id}" rows="3" placeholder="Type your answer…">${esc(v)}</textarea>`;
       else if(f.type==='select'||f.type==='choices'||f.type==='multi'){ const multi = f.type==='multi'; const arr = multi ? (Array.isArray(v)?v:[]) : (v?[v]:[]); const shown = multi ? (arr.length? (arr.length===1?arr[0]:arr.length+' selected') : '') : (v||''); ctl = `<div class="dd${multi?' multi':''}" data-id="${f.id}" data-multi="${multi?1:0}"><button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false"><span class="${shown?'':'ph'}">${shown?esc(shown):(multi?'Select all that apply':'Choose an option')}</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button><div class="dd-menu" role="listbox">${opts(f).map((o,i)=>`<button type="button" class="dd-opt" role="option" data-val="${esc(o)}" aria-selected="${arr.includes(o)}"><span class="key">${String.fromCharCode(65+i)}</span><span>${esc(o)}</span><span class="chk">${TICK}</span></button>`).join('')}</div></div>`; }
-      else ctl = `<input class="in" data-id="${f.id}" type="${f.type}" value="${esc(v)}" placeholder="${f.type==='email'?'name@example.com':f.type==='tel'?'+44 …':f.type==='number'?'e.g. 14':'Type your answer…'}"${f.type==='number'?' min="1" max="365"':''}>`;
-      return `<div class="fld" data-field="${f.id}">${one?'':`<span class="sub">${esc(lab(f))}${req}</span>`}${ctl}<div class="errmsg">${f.type==='email'?'Please enter a valid email address.':'This answer is needed to continue.'}</div></div>`;
+      else if(f.type==='phone'){ if(!state.phoneCode){ state.phoneCode = guessDial(state.residence); } const d = dialOf(state.phoneCode); ctl = `<div class="phone"><label class="code" title="Country code"><span>${d[3]}</span><b>${esc(d[2])}</b><select data-code="1" aria-label="Country code">${DIAL.map(x=>`<option value="${x[0]}"${x[0]===state.phoneCode?' selected':''}>${x[3]} ${esc(x[1])} (${x[2]})</option>`).join('')}</select></label><input class="in" data-id="phoneNumber" type="tel" inputmode="tel" autocomplete="tel-national" value="${esc(state.phoneNumber)}" placeholder="7123 456789"></div>`; }
+      else if(f.type==='numberUnit'){ if(!state[f.id+'Unit']) state[f.id+'Unit'] = f.units[0]; ctl = `<div class="combo"><input class="in" data-id="${f.id}" type="number" inputmode="numeric" min="1" max="999" value="${esc(v)}" placeholder="e.g. 2"><select class="in" data-id="${f.id}Unit" aria-label="Days, weeks or months">${f.units.map(u=>`<option${state[f.id+'Unit']===u?' selected':''}>${u}</option>`).join('')}</select></div>`; }
+      else if(f.type==='money'){ const sym = curSym(state.currency); ctl = `<div class="money" style="--curw:${sym?Math.max(44, 22 + sym.length*12):18}px"><span class="cur">${esc(sym)}</span><input class="in" data-id="${f.id}" data-money="1" type="text" inputmode="numeric" value="${esc(v)}" placeholder="e.g. 5,000"></div>`; }
+      else if(f.type==='dateText'){ ctl = `<input class="in" data-id="${f.id}" data-date="1" type="text" inputmode="numeric" autocomplete="off" maxlength="10" value="${esc(v)}" placeholder="DD / MM / YYYY">`; }
+      else ctl = `<input class="in" data-id="${f.id}" type="${f.type}" value="${esc(v)}" placeholder="${f.type==='email'?'name@example.com':f.type==='number'?'e.g. 14':'Type your answer…'}">`;
+      return `<div class="fld" data-field="${f.id}">${one?'':`<span class="sub">${esc(lab(f))}${req}</span>`}${ctl}<div class="errmsg">${f.type==='email'?'Please enter a valid email address.':f.type==='dateText'?'Please type a real date as day / month / year, e.g. 14/03/1990.':'This answer is needed to continue.'}</div></div>`;
     }).join('');
     const label = one ? esc(lab(fs[0])) + (fs[0].req?' <span class="req">*</span>':'') : fs.map(f=>esc(lab(f))).join(' <span style="color:var(--orange)">&amp;</span> ') + (fs.some(f=>f.req)?' <span class="req">*</span>':'');
     const hint = one && fs[0].hint ? `<p class="hint">${esc(fs[0].hint)}</p>` : '';
     const auto = one && (fs[0].type==='choices'||fs[0].type==='select');
-    return `${header(sc)}<div class="body"><h2 class="q">${label}</h2>${hint}<div class="ans${one?'':' two'}">${body}</div><div class="cta"><button class="ok" data-act="next">${auto?'Continue':'OK'} ${ARROW}</button><span class="kbd">${auto?`pick from the list, or press <b>A</b>–<b>${String.fromCharCode(64+opts(fs[0]).length)}</b>`:'or press <b>Enter ↵</b>'}</span></div></div>`;
+    return `${header(sc)}<div class="body"><h2 class="q">${label}</h2>${hint}<div class="ans${one?'':' two'}">${body}</div><div class="cta"><div class="btns"><button type="button" class="ok ghost backbtn" data-act="back">${BACK} Back</button><button class="ok" data-act="next">${auto?'Continue':'OK'} ${ARROW}</button></div><span class="kbd">${auto?`pick from the list, or press <b>A</b>–<b>${String.fromCharCode(64+opts(fs[0]).length)}</b>`:'or press <b>Enter ↵</b>'}</span></div></div>`;
   }
   if(sc.type==='review'){
     const blocks = answers().map(s=>`<div class="rv"><h3>${esc(s.section)}<button type="button" data-goto="${s.first}">Edit</button></h3><dl>${s.items.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div>`).join('');
-    return `${header(sc)}<div class="body"><h2 class="q">Review your answers</h2><div class="review">${blocks}</div><label class="consent" id="consentLbl"><input type="checkbox" id="consent"><span>I confirm this information is true and complete, and I agree to Gina’s Travel Agency using it to assess my visa options and contact me. This is a pre-assessment, not a guarantee of a visa.</span></label><div class="cta"><button class="ok" data-act="send">Send my assessment ${ARROW}</button></div></div>`;
+    return `${header(sc)}<div class="body"><h2 class="q">Review your answers</h2><div class="review">${blocks}</div><label class="consent" id="consentLbl"><input type="checkbox" id="consent"><span>I confirm this information is true and complete, and I agree to Gina’s Travel Agency using it to assess my visa options and contact me. This is a pre-assessment, not a guarantee of a visa.</span></label><div class="cta"><div class="btns"><button type="button" class="ok ghost backbtn" data-act="back">${BACK} Back</button><button class="ok" data-act="send">Send my assessment ${ARROW}</button></div></div></div>`;
   }
 }
 function answers(){
-  return STEPS.map((S,si)=>({section:S.title, first:SCREENS.findIndex(sc=>sc.type==='q' && sc.si===si), items:S.fields.filter(visible).map(f=>{ const v = state[f.id]; const txt = Array.isArray(v)?v.join(', '):(v||''); return [lab(f), txt]; }).filter(([,v])=>v.trim()!=='')}));
+  return STEPS.map((S,si)=>({section:S.title, first:SCREENS.findIndex(sc=>sc.type==='q' && sc.si===si), items:S.fields.filter(visible).map(f=>{ const v = state[f.id]; let txt = Array.isArray(v)?v.join(', '):(v||''); if(f.type==='phone') txt = fullPhone(state); else if(f.type==='numberUnit' && txt) txt = txt + ' ' + String(state[f.id+'Unit']||f.units[0]).toLowerCase(); else if(f.type==='money' && txt) txt = (curSym(state.currency) ? curSym(state.currency) + ' ' : '') + txt; return [lab(f), txt]; }).filter(([,v])=>v.trim()!=='')}));
 }
 
 function show(i, dir){
@@ -434,9 +482,19 @@ function bind(el, sc){
     pm.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>{ const t = firstOf(+b.dataset.part); setOpen(false); show(t, t<idx?'back':'fwd'); }));
     document.addEventListener('click',e=>{ if(!parts.contains(e.target) && !pm.contains(e.target)) setOpen(false); }); }
   el.querySelectorAll('.in').forEach(inp=>{
-    inp.addEventListener('input',()=>{ state[inp.dataset.id] = inp.value; inp.closest('.fld').classList.remove('err'); save(); });
+    inp.addEventListener('input',()=>{
+      if(inp.dataset.money){ const f = fmtMoney(inp.value); if(inp.value!==f) inp.value = f; }
+      if(inp.dataset.date){ const f = fmtDate(inp.value); if(inp.value!==f) inp.value = f; }
+      if(inp.dataset.id==='phoneNumber' && /^\s*\+/.test(inp.value)){ // typed the code into the number box: move it to the selector
+        const digits = inp.value.replace(/[^0-9]/g,''); const hit = [...DIAL].sort((a,b)=>b[2].length-a[2].length).find(d=>digits.startsWith(d[2].slice(1)));
+        if(hit){ state.phoneCode = hit[0]; const c = el.querySelector('.code'); if(c){ c.querySelector('span').textContent = hit[3]; c.querySelector('b').textContent = hit[2]; c.querySelector('select').value = hit[0]; } inp.value = digits.slice(hit[2].length-1); }
+      }
+      state[inp.dataset.id] = inp.value; inp.closest('.fld').classList.remove('err'); save(); });
+    if(inp.tagName==='SELECT') inp.addEventListener('change',()=>{ state[inp.dataset.id] = inp.value; save(); });
     inp.addEventListener('keydown',e=>{ if(e.key==='Enter' && !(inp.tagName==='TEXTAREA' && e.shiftKey)){ e.preventDefault(); advance(); } });
   });
+  el.querySelectorAll('[data-code]').forEach(sel=>sel.addEventListener('change',()=>{ state.phoneCode = sel.value; const d = dialOf(sel.value); const c = sel.closest('.code'); c.querySelector('span').textContent = d[3]; c.querySelector('b').textContent = d[2]; save(); const n = el.querySelector('[data-id="phoneNumber"]'); if(n) n.focus(); }));
+  el.querySelectorAll('[data-act="back"]').forEach(b=>b.addEventListener('click',()=>retreat()));
   el.querySelectorAll('.dd').forEach(dd=>{
     const multi = dd.dataset.multi==='1', id = dd.dataset.id, btn = dd.querySelector('.dd-btn'), label = btn.querySelector('span');
     const open = o=>{ dd.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); if(o) setTimeout(()=>dd.querySelector('.dd-menu').scrollIntoView({block:'nearest',behavior:'smooth'}),60); };
@@ -456,8 +514,8 @@ function bind(el, sc){
 function validate(){
   const sc = SCREENS[idx]; if(sc.type!=='q') return true; let first=null;
   sc.fields.filter(visible).forEach(f=>{
-    if(!f.req) return; const v = state[f.id]; const empty = v==null || (Array.isArray(v)?v.length===0:String(v).trim()==='');
-    const bad = empty || (f.type==='email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v));
+    if(!f.req) return; const v = f.type==='phone' ? state.phoneNumber : state[f.id]; const empty = v==null || (Array.isArray(v)?v.length===0:String(v).trim()==='');
+    const bad = empty || (f.type==='email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) || (f.type==='dateText' && !parseDMY(v)) || (f.type==='phone' && String(v).replace(/[^0-9]/g,'').length < 6);
     const el = current.querySelector(`[data-field="${f.id}"]`); el.classList.toggle('err',bad); if(bad && !first) first = el;
   });
   if(first){ current.animate([{transform:'translate(-50%,-50%)'},{transform:'translate(calc(-50% - 8px),-50%)'},{transform:'translate(calc(-50% + 8px),-50%)'},{transform:'translate(-50%,-50%)'}],{duration:320}); const i = first.querySelector('.in'); if(i) i.focus(); return false; }
@@ -470,9 +528,9 @@ document.addEventListener('keydown',e=>{
   const sc = SCREENS[idx]; const tag = (e.target.tagName||'').toLowerCase();
   if(e.key==='Enter' && (tag==='body' || tag==='button')){ e.preventDefault(); if(sc.type==='review') return; advance(); }
   if(e.key==='Escape'){ document.querySelectorAll('.dd.open,.parts.open,.parts-menu.open').forEach(d=>d.classList.remove('open')); }
-  if(e.key==='ArrowUp' && tag!=='textarea'){ retreat(); }
-  if(e.key==='ArrowDown' && tag!=='textarea'){ advance(); }
-  if(sc.type==='q' && tag!=='input' && tag!=='textarea' && /^[a-zA-Z]$/.test(e.key)){ const g = current.querySelector('.dd'); if(!g) return; const k = e.key.toUpperCase().charCodeAt(0)-65; const b = g.querySelectorAll('.dd-opt')[k]; if(b) b.click(); }
+  if(e.key==='ArrowUp' && tag!=='textarea' && tag!=='select' && tag!=='input'){ retreat(); }
+  if(e.key==='ArrowDown' && tag!=='textarea' && tag!=='select' && tag!=='input'){ advance(); }
+  if(sc.type==='q' && tag!=='input' && tag!=='textarea' && tag!=='select' && /^[a-zA-Z]$/.test(e.key)){ const g = current.querySelector('.dd'); if(!g) return; const k = e.key.toUpperCase().charCodeAt(0)-65; const b = g.querySelectorAll('.dd-opt')[k]; if(b) b.click(); }
 });
 
 // ---- Send --------------------------------------------------------------------------
@@ -480,7 +538,8 @@ function send(){
   const c = $('#consent'); if(!c.checked){ $('#consentLbl').classList.add('err'); c.focus(); return; }
   const btn = current.querySelector('[data-act="send"]'); btn.disabled = true; btn.textContent = 'Sending…';
   const text = summaryText(); const s = state;
-  const payload = { _subject: 'VISA ASSESSMENT: ' + (s.visaType||'') + ' — ' + (s.fullName||''), name: s.fullName, email: s.email, phone: s.phone, visa: s.visaType, purpose: s.purpose, travelDate: s.travelDate, summary: text };
+  const payload = { _subject: 'VISA ASSESSMENT: ' + (s.visaType||'') + ' — ' + (s.fullName||''), _replyto: s.email, email: s.email };
+  Object.assign(payload, emailFields());
   const done = (sent)=>{
     const [cls,msg] = readiness();
     const el = document.createElement('div'); el.className='card enter';

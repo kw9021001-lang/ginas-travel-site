@@ -256,6 +256,11 @@ details .body{padding:0 0 22px;color:var(--ink-2);font-size:15.5px;max-width:65c
 .field input,.field select,.field textarea{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid var(--line);background:var(--white);font:inherit;color:var(--ink);transition:border-color .2s,box-shadow .2s}
 .field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(30,44,150,.12)}
 .field textarea{min-height:110px;resize:vertical}
+.phonewrap{display:grid;grid-template-columns:auto 1fr;gap:8px}
+.phonewrap .code{position:relative;display:flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:12px;background:var(--white);padding:0 30px 0 12px;white-space:nowrap;font-size:15px;transition:border-color .2s,box-shadow .2s}
+.phonewrap .code::after{content:"";position:absolute;right:10px;top:50%;width:12px;height:12px;transform:translateY(-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2C96' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat}
+.phonewrap .code select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;padding:0}
+.phonewrap .code:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px rgba(30,44,150,.12)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:8px 14px;font-family:var(--display);font-size:13px;font-weight:500;cursor:pointer;transition:.2s}
 .chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
@@ -525,7 +530,7 @@ footer a:hover{color:var(--orange)}
       </div>
       <div class="row">
         <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name" placeholder="Full name"></div>
-        <div class="field"><label for="f-phone">Phone or WhatsApp</label><input id="f-phone" name="phone" required autocomplete="tel" placeholder="+44 …"></div>
+        <div class="field"><label for="f-phone">Phone or WhatsApp</label><div class="phonewrap"><label class="code" title="Country code"><span id="f-flag">🇬🇧</span><b id="f-dial">+44</b><select id="f-code" aria-label="Country code"></select></label><input id="f-phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel-national" placeholder="7123 456789"></div></div>
       </div>
       <div class="field"><label for="f-email">Email address</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="name@example.com"></div>
       <div class="row">
@@ -683,6 +688,20 @@ footer a:hover{color:var(--orange)}
 
   // Form (no backend on this site: show confirmation)
   const form = document.getElementById('enquiry');
+  // Country-code selector for the phone field (typing "+1 …" into the number box also switches it).
+  const DIAL = [['GB','United Kingdom','+44','🇬🇧'],['NG','Nigeria','+234','🇳🇬'],['GH','Ghana','+233','🇬🇭'],['US','United States','+1','🇺🇸'],['CA','Canada','+1','🇨🇦'],['IE','Ireland','+353','🇮🇪'],['AE','United Arab Emirates','+971','🇦🇪'],['ZA','South Africa','+27','🇿🇦'],['KE','Kenya','+254','🇰🇪'],['UG','Uganda','+256','🇺🇬'],['TZ','Tanzania','+255','🇹🇿'],['ZW','Zimbabwe','+263','🇿🇼'],['ZM','Zambia','+260','🇿🇲'],['CM','Cameroon','+237','🇨🇲'],['CI','Côte d’Ivoire','+225','🇨🇮'],['SN','Senegal','+221','🇸🇳'],['SL','Sierra Leone','+232','🇸🇱'],['GM','Gambia','+220','🇬🇲'],['LR','Liberia','+231','🇱🇷'],['EG','Egypt','+20','🇪🇬'],['MA','Morocco','+212','🇲🇦'],['ET','Ethiopia','+251','🇪🇹'],['RW','Rwanda','+250','🇷🇼'],['FR','France','+33','🇫🇷'],['DE','Germany','+49','🇩🇪'],['ES','Spain','+34','🇪🇸'],['IT','Italy','+39','🇮🇹'],['NL','Netherlands','+31','🇳🇱'],['BE','Belgium','+32','🇧🇪'],['PT','Portugal','+351','🇵🇹'],['SE','Sweden','+46','🇸🇪'],['NO','Norway','+47','🇳🇴'],['DK','Denmark','+45','🇩🇰'],['CH','Switzerland','+41','🇨🇭'],['AT','Austria','+43','🇦🇹'],['PL','Poland','+48','🇵🇱'],['GR','Greece','+30','🇬🇷'],['TR','Türkiye','+90','🇹🇷'],['SA','Saudi Arabia','+966','🇸🇦'],['QA','Qatar','+974','🇶🇦'],['IN','India','+91','🇮🇳'],['PK','Pakistan','+92','🇵🇰'],['BD','Bangladesh','+880','🇧🇩'],['LK','Sri Lanka','+94','🇱🇰'],['PH','Philippines','+63','🇵🇭'],['CN','China','+86','🇨🇳'],['AU','Australia','+61','🇦🇺'],['NZ','New Zealand','+64','🇳🇿'],['JM','Jamaica','+1876','🇯🇲'],['TT','Trinidad & Tobago','+1868','🇹🇹'],['BR','Brazil','+55','🇧🇷'],['MX','Mexico','+52','🇲🇽']];
+  const codeSel = form.querySelector('#f-code'), phoneIn = form.querySelector('#f-phone');
+  codeSel.innerHTML = DIAL.map(d=>`<option value="${d[0]}"${d[0]==='GB'?' selected':''}>${d[3]} ${d[1]} (${d[2]})</option>`).join('');
+  const dialOf = iso => DIAL.find(d=>d[0]===iso) || DIAL[0];
+  const showCode = ()=>{ const d = dialOf(codeSel.value); form.querySelector('#f-flag').textContent = d[3]; form.querySelector('#f-dial').textContent = d[2]; };
+  codeSel.addEventListener('change', ()=>{ showCode(); phoneIn.focus(); });
+  phoneIn.addEventListener('input', ()=>{
+    if(!/^\s*\+/.test(phoneIn.value)) return;
+    const digits = phoneIn.value.replace(/[^0-9]/g,''); const hit = [...DIAL].sort((a,b)=>b[2].length-a[2].length).find(d=>digits.startsWith(d[2].slice(1)));
+    if(hit){ codeSel.value = hit[0]; showCode(); phoneIn.value = digits.slice(hit[2].length-1); }
+  });
+  const fullPhone = ()=>{ const n = phoneIn.value.trim(); return n ? dialOf(codeSel.value)[2] + ' ' + n : ''; };
+
   form.addEventListener('submit', e=>{
     e.preventDefault();
     const name = form.querySelector('#f-name'), phone = form.querySelector('#f-phone'), email = form.querySelector('#f-email');
@@ -697,7 +716,7 @@ footer a:hover{color:var(--orange)}
       'Hello Gina’s Travel, I’d like a quote.',
       'Need: ' + needs,
       'Name: ' + v('f-name'),
-      'Phone: ' + v('f-phone'),
+      'Phone: ' + fullPhone(),
       'Email: ' + v('f-email'),
       'From: ' + (v('f-from') || 'London'),
       'To: ' + (v('f-to') || 'Not sure yet'),
@@ -713,7 +732,7 @@ footer a:hover{color:var(--orange)}
     // Deliver the enquiry to the agency inbox; fall back to WhatsApp if the mail relay is unreachable.
     fetch(FORM_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({
       _subject: 'Website enquiry: ' + needs + ' — ' + v('f-name'),
-      Need: needs, Name: v('f-name'), Phone: v('f-phone'), email: v('f-email'), From: v('f-from') || 'London', To: v('f-to') || 'Not sure yet',
+      Need: needs, Name: v('f-name'), Phone: fullPhone(), email: v('f-email'), From: v('f-from') || 'London', To: v('f-to') || 'Not sure yet',
       Dates: v('f-date') || 'Flexible', Travellers: v('f-pax'), Notes: v('f-notes') || '-'
     })}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(()=>{
       form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Your enquiry has been sent to info@ginastravel.co.uk. A consultant will get back to you soon.</p><p class="note">Need it sooner? <a href="${url}" target="_blank" rel="noopener">Send it on WhatsApp</a> or call +44 7432 112769.</p></div>`;

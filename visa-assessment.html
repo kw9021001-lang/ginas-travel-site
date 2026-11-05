@@ -64,7 +64,7 @@ button{font:inherit}
 .parts-btn svg{width:14px;height:14px;transition:transform .3s var(--ease)}
 .parts.open .parts-btn svg{transform:rotate(180deg)}
 .parts-menu{position:fixed;z-index:60;min-width:240px;background:#fff;border-radius:16px;box-shadow:0 30px 60px -20px rgba(20,31,110,.4),0 0 0 1px rgba(20,31,110,.08);padding:8px;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top right;pointer-events:none;transition:opacity .2s var(--ease),transform .25s var(--ease)}
-.parts.open .parts-menu{opacity:1;transform:none;pointer-events:auto}
+.parts-menu.open{opacity:1;transform:none;pointer-events:auto}
 .parts-menu button{width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;border:0;background:transparent;border-radius:10px;font-family:var(--display);font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;text-align:left;transition:background .15s}
 .parts-menu button:hover{background:var(--paper-2)}
 .parts-menu button:disabled{color:var(--ink-3);cursor:default}
@@ -376,6 +376,7 @@ function show(i, dir){
   if(animating) return; dir = dir || 'fwd';
   while(i>0 && i<SCREENS.length-1 && !screenVisible(SCREENS[i])) i += (dir==='back'?-1:1);
   idx = i; const sc = SCREENS[idx];
+  document.querySelectorAll('body > .parts-menu').forEach(m=>m.remove());
   const el = document.createElement('div'); el.className = 'card enter' + (dir==='back'?' back':''); el.innerHTML = html(sc);
   const old = current; current = el; animating = true;
   if(old){ old.classList.remove('enter','back'); old.classList.add('exit'); if(dir==='back') old.classList.add('back'); old.addEventListener('animationend',()=>old.remove(),{once:true}); setTimeout(()=>old.remove(),700); }
@@ -393,9 +394,11 @@ function bind(el, sc){
   el.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.goto,'back')));
   // parts dropdown
   const parts = el.querySelector('.parts');
-  if(parts){ const pb = parts.querySelector('.parts-btn'), pm = parts.querySelector('.parts-menu'); pb.addEventListener('click',()=>{ const o = !parts.classList.contains('open'); if(o){ const r = pb.getBoundingClientRect(); pm.style.top = (r.bottom + 8) + 'px'; pm.style.right = Math.max(12, innerWidth - r.right) + 'px'; pm.style.left = 'auto'; } parts.classList.toggle('open',o); pb.setAttribute('aria-expanded',o); });
-    parts.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>{ const t = firstOf(+b.dataset.part); parts.classList.remove('open'); show(t, t<idx?'back':'fwd'); }));
-    document.addEventListener('click',e=>{ if(!parts.contains(e.target)) parts.classList.remove('open'); }); }
+  if(parts){ const pb = parts.querySelector('.parts-btn'), pm = parts.querySelector('.parts-menu'); document.body.appendChild(pm); // portal: escapes the card's transform/overflow
+    const setOpen = o=>{ if(o){ const r = pb.getBoundingClientRect(); pm.style.top = (r.bottom + 8) + 'px'; pm.style.right = Math.max(12, innerWidth - r.right) + 'px'; pm.style.left = 'auto'; } parts.classList.toggle('open',o); pm.classList.toggle('open',o); pb.setAttribute('aria-expanded',o); };
+    pb.addEventListener('click',()=>setOpen(!pm.classList.contains('open')));
+    pm.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>{ const t = firstOf(+b.dataset.part); setOpen(false); show(t, t<idx?'back':'fwd'); }));
+    document.addEventListener('click',e=>{ if(!parts.contains(e.target) && !pm.contains(e.target)) setOpen(false); }); }
   el.querySelectorAll('.in').forEach(inp=>{
     inp.addEventListener('input',()=>{ state[inp.dataset.id] = inp.value; inp.closest('.fld').classList.remove('err'); save(); });
     inp.addEventListener('keydown',e=>{ if(e.key==='Enter' && !(inp.tagName==='TEXTAREA' && e.shiftKey)){ e.preventDefault(); advance(); } });
@@ -432,7 +435,7 @@ $('#nextq').addEventListener('click',advance); $('#prev').addEventListener('clic
 document.addEventListener('keydown',e=>{
   const sc = SCREENS[idx]; const tag = (e.target.tagName||'').toLowerCase();
   if(e.key==='Enter' && (tag==='body' || tag==='button')){ e.preventDefault(); if(sc.type==='review') return; advance(); }
-  if(e.key==='Escape'){ document.querySelectorAll('.dd.open,.parts.open').forEach(d=>d.classList.remove('open')); }
+  if(e.key==='Escape'){ document.querySelectorAll('.dd.open,.parts.open,.parts-menu.open').forEach(d=>d.classList.remove('open')); }
   if(e.key==='ArrowUp' && tag!=='textarea'){ retreat(); }
   if(e.key==='ArrowDown' && tag!=='textarea'){ advance(); }
   if(sc.type==='q' && tag!=='input' && tag!=='textarea' && /^[a-zA-Z]$/.test(e.key)){ const g = current.querySelector('.dd'); if(!g) return; const k = e.key.toUpperCase().charCodeAt(0)-65; const b = g.querySelectorAll('.dd-opt')[k]; if(b) b.click(); }

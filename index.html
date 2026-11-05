@@ -527,6 +527,7 @@ footer a:hover{color:var(--orange)}
         <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name" placeholder="Full name"></div>
         <div class="field"><label for="f-phone">Phone or WhatsApp</label><input id="f-phone" name="phone" required autocomplete="tel" placeholder="+44 …"></div>
       </div>
+      <div class="field"><label for="f-email">Email address</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="name@example.com"></div>
       <div class="row">
         <div class="field"><label for="f-from">Flying from</label><input id="f-from" name="from" placeholder="London (any airport)"></div>
         <div class="field"><label for="f-to">Going to</label><input id="f-to" name="to" placeholder="e.g. Lagos, Dubai"></div>
@@ -572,6 +573,14 @@ footer a:hover{color:var(--orange)}
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const WA = 'https://wa.me/447432112769';
   const FORM_ENDPOINT = 'https://formspree.io/f/mrppallj';
+  // Brevo sign-up form for the 'Visa enquiries' list: an automation emails the pre-assessment link ~1 hour later.
+  const BREVO_VISA_FORM = 'https://84733c9d.sibforms.com/serve/MUIFAEpXIw6lmVzWN_8b2qfEpAfN426ouEZKURQa5POow9AkwFAoyZvz_REwzzs7EjRmbsct2_cVIE54WaGxAEj6UwH1GRsXkeRMYUcwGH86n1mAZCCaltKhFPhFp_GEygl96KggqdZTogKq9sHahj0qXhyifQCojL76s8o1PL_a-z6YVAJ5bSlprtJfy4w1iDxz6I0LLXycBYaKcw==';
+  function addToVisaFollowUp(email, fullName){
+    try{
+      const fd = new FormData(); fd.append('EMAIL', email); fd.append('FIRSTNAME', (fullName||'').trim().split(/\s+/)[0] || ''); fd.append('email_address_check', ''); fd.append('locale', 'en');
+      return fetch(BREVO_VISA_FORM, {method:'POST', body: fd, mode:'no-cors', keepalive:true}).catch(()=>{});
+    }catch(e){ return Promise.resolve(); }
+  }
   document.documentElement.classList.add('js');
   // Point every WhatsApp link at the agency number
   document.querySelectorAll('a[data-wa]').forEach(a=>{ a.href = WA + '?text=' + encodeURIComponent(a.dataset.wa); a.target='_blank'; a.rel='noopener'; });
@@ -676,10 +685,10 @@ footer a:hover{color:var(--orange)}
   const form = document.getElementById('enquiry');
   form.addEventListener('submit', e=>{
     e.preventDefault();
-    const name = form.querySelector('#f-name'), phone = form.querySelector('#f-phone');
-    let ok = true;
-    [name,phone].forEach(f=>{ const bad = !f.value.trim(); f.style.borderColor = bad ? '#D64545' : ''; if(bad) ok=false; });
-    if(!ok){ (name.value.trim()?phone:name).focus(); return; }
+    const name = form.querySelector('#f-name'), phone = form.querySelector('#f-phone'), email = form.querySelector('#f-email');
+    let ok = true, firstBad = null;
+    [name,phone,email].forEach(f=>{ const bad = !f.value.trim() || (f.type==='email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value)); f.style.borderColor = bad ? '#D64545' : ''; if(bad){ ok=false; firstBad = firstBad || f; } });
+    if(!ok){ firstBad.focus(); return; }
     const first = name.value.trim().split(' ')[0];
     // Build the enquiry as a WhatsApp message and open it in a new tab.
     const v = id => (form.querySelector('#'+id)?.value || '').trim();
@@ -689,6 +698,7 @@ footer a:hover{color:var(--orange)}
       'Need: ' + needs,
       'Name: ' + v('f-name'),
       'Phone: ' + v('f-phone'),
+      'Email: ' + v('f-email'),
       'From: ' + (v('f-from') || 'London'),
       'To: ' + (v('f-to') || 'Not sure yet'),
       'Dates: ' + (v('f-date') || 'Flexible'),
@@ -697,12 +707,13 @@ footer a:hover{color:var(--orange)}
     ].filter(Boolean).join('\n');
     const url = WA + '?text=' + encodeURIComponent(lines);
     const btn = form.querySelector('#submitBtn'); btn.disabled = true; btn.textContent = 'Sending…';
+    if(/\bVisa\b/.test(needs)) addToVisaFollowUp(v('f-email'), v('f-name'));
     const safeFirst = first.replace(/[<>&]/g,'');
     const tick = '<span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>';
     // Deliver the enquiry to the agency inbox; fall back to WhatsApp if the mail relay is unreachable.
     fetch(FORM_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({
       _subject: 'Website enquiry: ' + needs + ' — ' + v('f-name'),
-      Need: needs, Name: v('f-name'), Phone: v('f-phone'), From: v('f-from') || 'London', To: v('f-to') || 'Not sure yet',
+      Need: needs, Name: v('f-name'), Phone: v('f-phone'), email: v('f-email'), From: v('f-from') || 'London', To: v('f-to') || 'Not sure yet',
       Dates: v('f-date') || 'Flexible', Travellers: v('f-pax'), Notes: v('f-notes') || '-'
     })}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(()=>{
       form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Your enquiry has been sent to info@ginastravel.co.uk. A consultant will get back to you soon.</p><p class="note">Need it sooner? <a href="${url}" target="_blank" rel="noopener">Send it on WhatsApp</a> or call +44 7432 112769.</p></div>`;

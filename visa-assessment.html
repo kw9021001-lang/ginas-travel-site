@@ -63,7 +63,7 @@ button{font:inherit}
 .parts-btn .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px}
 .parts-btn svg{width:14px;height:14px;transition:transform .3s var(--ease)}
 .parts.open .parts-btn svg{transform:rotate(180deg)}
-.parts-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:30;min-width:240px;background:#fff;border-radius:16px;box-shadow:0 30px 60px -20px rgba(20,31,110,.4),0 0 0 1px rgba(20,31,110,.08);padding:8px;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top right;pointer-events:none;transition:opacity .2s var(--ease),transform .25s var(--ease)}
+.parts-menu{position:fixed;z-index:60;min-width:240px;background:#fff;border-radius:16px;box-shadow:0 30px 60px -20px rgba(20,31,110,.4),0 0 0 1px rgba(20,31,110,.08);padding:8px;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top right;pointer-events:none;transition:opacity .2s var(--ease),transform .25s var(--ease)}
 .parts.open .parts-menu{opacity:1;transform:none;pointer-events:auto}
 .parts-menu button{width:100%;display:flex;align-items:center;gap:12px;padding:10px 12px;border:0;background:transparent;border-radius:10px;font-family:var(--display);font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;text-align:left;transition:background .15s}
 .parts-menu button:hover{background:var(--paper-2)}
@@ -393,7 +393,7 @@ function bind(el, sc){
   el.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(+b.dataset.goto,'back')));
   // parts dropdown
   const parts = el.querySelector('.parts');
-  if(parts){ const pb = parts.querySelector('.parts-btn'); pb.addEventListener('click',()=>{ const o = !parts.classList.contains('open'); parts.classList.toggle('open',o); pb.setAttribute('aria-expanded',o); });
+  if(parts){ const pb = parts.querySelector('.parts-btn'), pm = parts.querySelector('.parts-menu'); pb.addEventListener('click',()=>{ const o = !parts.classList.contains('open'); if(o){ const r = pb.getBoundingClientRect(); pm.style.top = (r.bottom + 8) + 'px'; pm.style.right = Math.max(12, innerWidth - r.right) + 'px'; pm.style.left = 'auto'; } parts.classList.toggle('open',o); pb.setAttribute('aria-expanded',o); });
     parts.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>{ const t = firstOf(+b.dataset.part); parts.classList.remove('open'); show(t, t<idx?'back':'fwd'); }));
     document.addEventListener('click',e=>{ if(!parts.contains(e.target)) parts.classList.remove('open'); }); }
   el.querySelectorAll('.in').forEach(inp=>{

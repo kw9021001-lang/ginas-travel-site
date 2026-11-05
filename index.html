@@ -462,7 +462,7 @@ footer a:hover{color:var(--orange)}
     </div>
     <div class="steps">
       <div class="step rv"><div class="n">1</div><h3>Tell us the trip</h3><p>Send a message on WhatsApp, call us, or use the enquiry form below. Where, when, who’s travelling and a rough budget is enough to start.</p></div>
-      <div class="step rv" style="transition-delay:.1s"><div class="n">2</div><h3>We send options</h3><p>Within one working day you get two or three clear itineraries with prices, airlines, hotels and what’s included. We adjust until it’s right.</p></div>
+      <div class="step rv" style="transition-delay:.1s"><div class="n">2</div><h3>We send options</h3><p>We come back to you with two or three clear itineraries with prices, airlines, hotels and what’s included. We adjust until it’s right.</p></div>
       <div class="step rv" style="transition-delay:.2s"><div class="n">3</div><h3>We book it for you</h3><p>Once you approve, we make the bookings, handle visa paperwork if needed, and send everything in one tidy travel pack.</p></div>
     </div>
   </div>
@@ -495,7 +495,7 @@ footer a:hover{color:var(--orange)}
       <details class="rv"><summary>Do you charge a fee for quotes?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">Quotes are free. A small service fee applies to some bookings, such as complex multi-city itineraries and visa assistance, and we always tell you the fee before you commit.</div></details>
       <details class="rv"><summary>Which visas can you help with?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">UK visitor and family visas, Schengen, USA (ESTA and B1/B2), Canada, UAE, Türkiye, Nigeria and Ghana are the most common. We guide you through requirements and check your application; the decision is always made by the embassy. Send an enquiry and we will reply with a short pre-assessment to complete, so we can tell you what you qualify for and which documents to prepare.</div></details>
       <details class="rv"><summary>Is my money protected?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">Package holidays we arrange are booked through accredited, financially protected partners. For flight-only bookings we issue tickets through licensed consolidators and recommend travel insurance, which we can also arrange.</div></details>
-      <details class="rv"><summary>How quickly will I hear back?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">WhatsApp messages are usually answered within the hour during office hours (Mon–Sat, 9am–7pm UK time). Full itineraries and quotes are sent within one working day.</div></details>
+      <details class="rv"><summary>How quickly will I hear back?<span class="plus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="body">We answer WhatsApp messages as quickly as we can during office hours (Mon–Sat, 9am–7pm UK time), and follow up with full itineraries and quotes shortly after.</div></details>
     </div>
   </div>
 </section>
@@ -537,7 +537,7 @@ footer a:hover{color:var(--orange)}
       </div>
       <div class="field"><label for="f-notes">Anything else?</label><textarea id="f-notes" name="notes" placeholder="Budget, preferred airline, visa questions…"></textarea></div>
       <button class="btn btn-primary" type="submit" id="submitBtn" style="justify-content:center">Send enquiry</button>
-      <p class="note">Your enquiry goes straight to info@ginastravel.co.uk. We reply within one working day. No payment is taken on this website.</p>
+      <p class="note">Your enquiry goes straight to info@ginastravel.co.uk and a consultant will get back to you soon. No payment is taken on this website.</p>
     </form>
   </div>
 </section>
@@ -705,10 +705,10 @@ footer a:hover{color:var(--orange)}
       Need: needs, Name: v('f-name'), Phone: v('f-phone'), From: v('f-from') || 'London', To: v('f-to') || 'Not sure yet',
       Dates: v('f-date') || 'Flexible', Travellers: v('f-pax'), Notes: v('f-notes') || '-'
     })}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(()=>{
-      form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Your enquiry has been sent to info@ginastravel.co.uk. A consultant will reply within one working day.</p><p class="note">Need it sooner? <a href="${url}" target="_blank" rel="noopener">Send it on WhatsApp</a> or call +44 7432 112769.</p></div>`;
+      form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Your enquiry has been sent to info@ginastravel.co.uk. A consultant will get back to you soon.</p><p class="note">Need it sooner? <a href="${url}" target="_blank" rel="noopener">Send it on WhatsApp</a> or call +44 7432 112769.</p></div>`;
     }).catch(()=>{
       window.open(url, '_blank', 'noopener');
-      form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Email is busy right now, so your enquiry has opened in WhatsApp. Press send there and a consultant will reply within one working day.</p><p class="note">WhatsApp didn’t open? <a href="${url}" target="_blank" rel="noopener">Tap here to send it</a> or email info@ginastravel.co.uk.</p></div>`;
+      form.innerHTML = `<div class="success">${tick}<h3>Thanks, ${safeFirst}.</h3><p class="lead" style="text-align:center">Email is busy right now, so your enquiry has opened in WhatsApp. Press send there and a consultant will get back to you soon.</p><p class="note">WhatsApp didn’t open? <a href="${url}" target="_blank" rel="noopener">Tap here to send it</a> or email info@ginastravel.co.uk.</p></div>`;
     });
   });
 

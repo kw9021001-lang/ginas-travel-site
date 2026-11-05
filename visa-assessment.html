@@ -100,8 +100,9 @@ textarea.in{min-height:110px;resize:none;font-size:17px;line-height:1.5}
 .dd-btn .chev svg{width:18px;height:18px}
 .dd.open .dd-btn .chev{transform:rotate(180deg)}
 .dd-menu{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:20;background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 30px 60px -20px rgba(20,31,110,.45),0 0 0 1px rgba(20,31,110,.08);padding:8px;max-height:min(44vh,340px);overflow:auto;transform-origin:top;opacity:0;transform:scaleY(.94) translateY(-6px);pointer-events:none;transition:opacity .2s var(--ease),transform .28s var(--ease);scrollbar-width:thin}
-.dd.open .dd-menu{opacity:1;transform:none;pointer-events:auto}
-.dd.up .dd-menu{top:auto;bottom:calc(100% + 8px);transform-origin:bottom}
+.dd.open .dd-menu{opacity:1;transform:none;pointer-events:auto;position:relative;top:0;margin-top:8px;box-shadow:0 0 0 1px rgba(20,31,110,.08);max-height:260px}
+.dd.open .dd-menu{animation:ddin .3s var(--ease)}
+@keyframes ddin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 .dd-opt{width:100%;display:flex;align-items:center;gap:12px;padding:11px 12px;border:0;background:transparent;border-radius:10px;font:inherit;font-family:var(--display);font-weight:500;font-size:15.5px;color:var(--ink);cursor:pointer;text-align:left;transition:background .15s}
 .dd-opt:hover{background:var(--paper-2)}
 .dd-opt .key{flex:none;width:26px;height:26px;border-radius:7px;background:var(--paper-2);color:var(--ink-2);display:grid;place-items:center;font-size:11.5px;font-weight:600}
@@ -400,7 +401,7 @@ function bind(el, sc){
   });
   el.querySelectorAll('.dd').forEach(dd=>{
     const multi = dd.dataset.multi==='1', id = dd.dataset.id, btn = dd.querySelector('.dd-btn'), label = btn.querySelector('span');
-    const open = o=>{ dd.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); if(o){ const r = dd.getBoundingClientRect(); dd.classList.toggle('up', r.bottom + 300 > innerHeight && r.top > 340); } };
+    const open = o=>{ dd.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); if(o) setTimeout(()=>dd.querySelector('.dd-menu').scrollIntoView({block:'nearest',behavior:'smooth'}),60); };
     const refresh = ()=>{ const v = state[id]; const arr = multi ? (Array.isArray(v)?v:[]) : (v?[v]:[]); dd.querySelectorAll('.dd-opt').forEach(o=>o.setAttribute('aria-selected', arr.includes(o.dataset.val))); const shown = multi ? (arr.length? (arr.length===1?arr[0]:arr.length+' selected') : '') : (v||''); label.textContent = shown || (multi?'Select all that apply':'Choose an option'); label.className = shown?'':'ph'; };
     btn.addEventListener('click', ()=>open(!dd.classList.contains('open')));
     dd.querySelectorAll('.dd-opt').forEach(o=>o.addEventListener('click', ()=>{

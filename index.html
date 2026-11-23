@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TravelAgency","name":"Gina's Travel Agency","telephone":"+447432112769","email":"info@ginastravel.co.uk","address":{"@type":"PostalAddress","addressLocality":"London","addressCountry":"GB"},"sameAs":["https://www.instagram.com/ginatravelagency.uk"],"openingHours":"Mo-Sa 09:00-19:00"}
+{"@context":"https://schema.org","@type":"TravelAgency","name":"Gina's Travel Agency","telephone":"+447432112769","email":"info@ginastravel.co.uk","address":{"@type":"PostalAddress","streetAddress":"81 Stone Lodge Road","addressLocality":"Dartford","addressRegion":"Kent","postalCode":"DA2 6GZ","addressCountry":"GB"},"legalName":"Ginasworldboutique & Travel Ltd","identifier":"10958121","sameAs":["https://www.instagram.com/ginatravelagency.uk"],"openingHours":"Mo-Sa 09:00-19:00"}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -290,6 +290,11 @@ footer a{text-decoration:none;color:rgba(255,255,255,.75);transition:color .2s}
 footer a:hover{color:var(--orange)}
 .flegal{margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:grid;gap:10px;font-size:13px;line-height:1.6;max-width:900px}
 .flegal p{margin:0}.flegal a{color:#fff}
+.fpts{display:flex;gap:22px;align-items:center}
+.ptsbadge{flex:none;display:block;width:190px;border-radius:14px;overflow:hidden;line-height:0;transition:transform .25s}
+.ptsbadge:hover{transform:translateY(-2px)}
+.ptsbadge img{width:100%;height:auto;display:block}
+@media(max-width:560px){.fpts{flex-direction:column;align-items:flex-start;gap:14px}.ptsbadge{width:170px}}
 .fbottom{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px}
 
 /* reveal system */
@@ -567,10 +572,10 @@ footer a:hover{color:var(--orange)}
       </div>
       <div><h4>Services</h4><ul><li><a href="#services">Flight booking</a></li><li><a href="#services">Tour packages</a></li><li><a href="#services">Hotel reservations</a></li><li><a href="#services">Visa assistance</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#about">About</a></li><li><a href="#destinations">Destinations</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li><li><a href="/terms/">Terms of business</a></li><li><a href="/privacy/">Privacy Policy</a></li></ul></div>
-      <div><h4>Contact</h4><ul><li><a href="#" data-wa="Hello Gina’s Travel, I’d like to ask about a trip.">+44 7432 112769</a></li><li><a href="https://www.instagram.com/ginatravelagency.uk" target="_blank" rel="noopener">@ginatravelagency.uk</a></li><li><a href="mailto:info@ginastravel.co.uk">info@ginastravel.co.uk</a></li><li>London, United Kingdom</li><li>Mon–Sat, 9am–7pm</li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="#" data-wa="Hello Gina’s Travel, I’d like to ask about a trip.">+44 7432 112769</a></li><li><a href="https://www.instagram.com/ginatravelagency.uk" target="_blank" rel="noopener">@ginatravelagency.uk</a></li><li><a href="mailto:info@ginastravel.co.uk">info@ginastravel.co.uk</a></li><li>81 Stone Lodge Road, Dartford, DA2 6GZ</li><li>Mon–Sat, 9am–7pm</li></ul></div>
     </div>
     <div class="flegal">
-      <p>Gina’s Travel Agency is a member of Protected Trust Services (PTS Membership No. 6619). All monies paid to us for non-flight travel arrangements are protected in an independent PTS Trust Account. For flight-only and flight-inclusive holiday bookings arranged through Aviate, we act as an agent for Aviate Management Ltd (ATOL 10232).</p>
+      <div class="fpts"><a class="ptsbadge" href="https://protectedtrustservices.com" target="_blank" rel="noopener" aria-label="Protected Trust Services member, number 6619. Opens the PTS website."><img src="assets/pts-member.jpg" width="640" height="289" alt="Protected Trust Services member: Ginasworldboutique &amp; Travel Ltd, member number 6619" loading="lazy"></a><p>Gina’s Travel Agency is a member of Protected Trust Services (PTS Membership No. 6619). All monies paid to us for non-flight travel arrangements are protected in an independent PTS Trust Account. For flight-only and flight-inclusive holiday bookings arranged through Aviate, we act as an agent for Aviate Management Ltd (ATOL 10232).</p></div>
       <p>Gina’s Travel Agency is a trading name of Ginasworldboutique &amp; Travel Ltd. Registered in England &amp; Wales No. 10958121. Registered office: 81 Stone Lodge Road, Dartford, DA2 6GZ.</p>
       <p><a href="https://protectedtrustservices.com" target="_blank" rel="noopener">Verify our Protected Trust Services membership</a> &nbsp;·&nbsp; <a href="/terms/">Terms of business</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy Policy</a></p>
     </div>

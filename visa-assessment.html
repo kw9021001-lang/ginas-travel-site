@@ -446,7 +446,7 @@ function html(sc){
   }
   if(sc.type==='review'){
     const blocks = answers().map(s=>`<div class="rv"><h3>${esc(s.section)}<button type="button" data-goto="${s.first}">Edit</button></h3><dl>${s.items.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div>`).join('');
-    return `${header(sc)}<div class="body"><h2 class="q">Review your answers</h2><div class="review">${blocks}</div><label class="consent" id="consentLbl"><input type="checkbox" id="consent"><span>I confirm this information is true and complete, and I agree to Gina’s Travel Agency using it to assess my visa options and contact me. This is a pre-assessment, not a guarantee of a visa.</span></label><div class="cta"><div class="btns"><button type="button" class="ok ghost backbtn" data-act="back">${BACK} Back</button><button class="ok" data-act="send">Send my assessment ${ARROW}</button></div></div></div>`;
+    return `${header(sc)}<div class="body"><h2 class="q">Review your answers</h2><div class="review">${blocks}</div><label class="consent" id="consentLbl"><input type="checkbox" id="consent"><span>I confirm this information is true and complete, and I agree to Gina’s Travel Agency using it to assess my visa options and contact me. This is a pre-assessment, not a guarantee of a visa. See our <a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label><div class="cta"><div class="btns"><button type="button" class="ok ghost backbtn" data-act="back">${BACK} Back</button><button class="ok" data-act="send">Send my assessment ${ARROW}</button></div></div></div>`;
   }
 }
 function answers(){
